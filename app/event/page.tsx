@@ -5,7 +5,7 @@ export default function Event() {
   return (
     <>
       <PageWrapper>
-        <div className="flex flex-col-reverse gap-8">
+        <div className="flex flex-col-reverse gap-8 items-center">
           {events.map((event) => (
             <EventList key={event.id} event={event} />
           ))}
@@ -17,24 +17,32 @@ export default function Event() {
 
 const EventList = ({ event }: { event: Event }) => (
   <>
-    <div className="border sm:flex">
-      <div className="sm:w-2/5">
-        <Image src={photo1} alt={""} className="object-cover" />
-      </div>
-      <div className="sm:w-3/5">
-        <p className="text-md text-neutral-500 font-light">
-          {event.date} &nbsp;
-          {event.time}
+    <div className="border rounded-2xl w-[300px] hover:shadow sm:w-[600px] sm:h-[250px] sm:flex lg:w-[900px] lg:h-[300px]">
+      <Image
+        src={photo1}
+        alt={""}
+        className="object-cover rounded-t-2xl sm:w-2/5 sm:rounded-2xl"
+      />
+      <div className="p-4 sm:w-3/5 lg:p-8">
+        <div className="flex justify-between">
+          <p className="text-sm text-neutral-500 font-light">{event.date}</p>
+          <p className="text-sm text-neutral-500 font-light">{event.time}</p>
+        </div>
+
+        <p className="mt-4 mb-2 text-2xl text-neutral-800 font-bold">
+          {event.title}
         </p>
-        <p className="text-2xl text-neutral-800 font-bold">{event.title}</p>
-        <p className="text-md text-neutral-500 font-normal">{event.location}</p>
-        <p className="text-lg text-neutral-600 font-normal text-ellipsis">
+        <p className="mb-6 text-sm text-neutral-500 font-normal">
+          {event.location}
+        </p>
+        <p className="text-base text-neutral-600 font-normal text-ellipsis">
           {event.description}
         </p>
       </div>
     </div>
   </>
 );
+
 import photo1 from "../../assets/photo1.jpg";
 
 interface Event {

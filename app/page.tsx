@@ -26,7 +26,7 @@ export default function Page() {
           alt={"Background Image of the Hero Section"}
           className="md:hidden absolute top-0 left-0 z-[-1]"
         />
-        <section className="mb-12">
+        <section className="mb-12 h-screen">
           <p className="text-5xl text-neutral-8-- drop-shadow-lg font-black">
             大自然学习
           </p>

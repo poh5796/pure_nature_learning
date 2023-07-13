@@ -29,63 +29,110 @@ export default function Navbar() {
     });
   }
 
-  return (
-    <nav id="nav" className="sticky top-0 flex justify-between px-8 py-4 ">
-      <Link href={"/"}>
-        <span className="flex text-lg font-semibold text-neutral-950">
-          朴乐 | PURE
-          <Image src={bird} alt={"Logo Image"} height={25} width={25} />
-        </span>
-      </Link>
+  function openNav() {
+    const sidenav = document.getElementById("sidenav");
+    if (sidenav) {
+      sidenav.style.height = "100vh";
+      sidenav!.classList.add("glass");
+    }
+  }
 
-      <ul className="flex gap-8">
-        {links.map((link) => (
-          <li key={link.href}>
-            <motion.div whileHover={{ scale: 1.1 }}>
-              <Link
-                className={`${
-                  link.href == path ? "font-black" : "font-semibold"
-                } text-sm text-neutral-800`}
-                href={link.href}
-              >
-                {link.name}
-              </Link>
-            </motion.div>
-          </li>
-        ))}
-      </ul>
-      {/* <div className="block md:hidden">
-        <button
-          id="button-three"
-          onClick={() => {
-            let button = document.getElementById("button-three");
-            setToggle(!toggle);
-            if (toggle) {
-              button?.setAttribute("aria-expanded", "true");
-            } else {
-              button?.setAttribute("aria-expanded", "false");
-            }
-          }}
-          aria-controls="primary-navigation"
-          aria-expanded="false"
+  function closeNav() {
+    const sidenav = document.getElementById("sidenav");
+    if (sidenav) {
+      sidenav.style.height = "0px";
+    }
+    setTimeout(() => {
+      sidenav?.classList.remove("glass");
+    }, 100);
+  }
+
+  return (
+    <>
+      <nav id="nav" className="sticky top-0 flex justify-between px-8 py-4">
+        <Link href={"/"}>
+          <span className="flex text-lg font-semibold text-neutral-950">
+            朴乐 | PURE
+            <Image src={bird} alt={"Logo Image"} height={25} width={25} />
+          </span>
+        </Link>
+
+        <ul className="hidden sm:flex sm:gap-8">
+          {links.map((link) => (
+            <li key={link.href}>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Link
+                  className={`${
+                    link.href == path ? "font-black" : "font-semibold"
+                  } text-sm text-neutral-800`}
+                  href={link.href}
+                  scroll={false}
+                >
+                  {link.name}
+                </Link>
+              </motion.div>
+            </li>
+          ))}
+        </ul>
+
+        <motion.div
+          className="flex justify-center items-center z-3 sm:hidden hover:cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+          onClick={() => setToggle(!toggle)}
         >
           <svg
-            stroke="var(--button-color)"
-            fill="none"
+            fill="var(--button-color)"
             className="hamburger"
-            viewBox="-10 -10 120 120"
-            width="30"
+            viewBox="0 0 100 100"
+            width="20"
           >
-            <path
-              className="line"
-              stroke-width="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m 20 40 h 60 a 1 1 0 0 1 0 20 h -60 a 1 1 0 0 1 0 -40 h 30 v 70"
-            ></path>
+            <rect
+              className="line top"
+              width="80"
+              height="10"
+              x="10"
+              y="25"
+              rx="5"
+            ></rect>
+            <rect
+              className="line middle"
+              width="80"
+              height="10"
+              x="10"
+              y="45"
+              rx="5"
+            ></rect>
+            <rect
+              className="line bottom"
+              width="80"
+              height="10"
+              x="10"
+              y="65"
+              rx="5"
+            ></rect>
           </svg>
-        </button>
-      </div> */}
-    </nav>
+        </motion.div>
+      </nav>
+      <div id="sidenav" className={`${toggle ? openNav() : closeNav()}`}>
+        <ul className="flex flex-col gap-8 px-8 py-4">
+          {links.map((link) => (
+            <li key={link.href}>
+              <motion.div whileHover={{ scale: 1.05, x: 15, y: -3 }}>
+                <Link
+                  className={`${
+                    link.href == path ? "font-black" : "font-semibold"
+                  } text-xl text-neutral-800`}
+                  href={link.href}
+                  scroll={false}
+                  onClick={() => setToggle(!toggle)}
+                >
+                  {link.name}
+                </Link>
+              </motion.div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
