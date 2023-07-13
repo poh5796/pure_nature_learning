@@ -15,7 +15,7 @@ export default function Event() {
   );
 }
 
-const EventList = ({ event }) => (
+const EventList = ({ event }: { event: Event }) => (
   <>
     <div className="border sm:flex">
       <div className="sm:w-2/5">
