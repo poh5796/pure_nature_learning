@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+html {
+  scroll-behavior: smooth;
+  scroll-padding: 5rem;
+}
+body {
+  color: rgb(var(--foreground-rgb));
+  /* background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb)); */
+}
+
+.fadeOut {
+  animation: fadeOut 3s ease-in-out 1s 1 forwards;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
+.moveText {
+  animation: moveText 3s;
+}
+@keyframes moveText {
+  0% {
+    transform: translate(0.5vw, 0.5vh);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+.scaleText {
+  animation: 2s ease-in scaleText 1s 1 forwards;
+}
+@keyframes scaleText {
+  0% {
+    transform: scale(3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+#nav.glass {
+  z-index: 100;
+  text-shadow: #fff 0px 0px 4px;
+  background-color: rgba(175, 175, 175, 0.1);
+  -webkit-animation: blur 4s ease 0s forwards;
+  animation: blur 0.2s ease-in 0s forwards;
+}
+@keyframes blur {
+  0% {
+    -webkit-backdrop-filter: saturate(0%) blur(0px);
+    backdrop-filter: saturate(0%) blur(0px);
+  }
+  100% {
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    backdrop-filter: saturate(180%) blur(10px);
+  }
+}
+
+#button-three {
+  --button-color: black;
+  overflow: hidden;
+}
+
+#button-three .hamburger {
+  transition: translate 1s, rotate 1s;
+}
+
+#button-three[aria-expanded="true"] .hamburger {
+  translate: 10px -10px;
+  rotate: 0.125turn;
+}
+
+#button-three .line {
+  transition: 1s;
+  stroke-dasharray: 60 31 60 300;
+}
+
+#button-three[aria-expanded="true"] .line {
+  stroke-dasharray: 60 105 60 300;
+  stroke-dashoffset: -90;
+}
