@@ -8,6 +8,7 @@ export default function About() {
       <PageWrapper>
         <section className="flex">
           <p>About Us</p>
+          <p>Hi</p>
         </section>
       </PageWrapper>
     </>
