@@ -18,14 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-      </head>
+      <head></head>
       <body>
         <Navbar></Navbar>
         <div className={`${inter.className} px-[10vw] py-[5vh]`}>
