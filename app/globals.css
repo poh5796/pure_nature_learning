@@ -42,7 +42,7 @@ body {
 }
 .glass {
   text-shadow: #fff 0px 0px 4px;
-  background-color: rgba(175, 175, 175, 0.1);
+  background-color: rgba(200, 200, 200, 0.2);
   -webkit-animation: blur 4s ease 0s forwards;
   animation: blur 0.2s ease-in 0s forwards;
 }
@@ -55,4 +55,64 @@ body {
     -webkit-backdrop-filter: saturate(180%) blur(10px);
     backdrop-filter: saturate(180%) blur(10px);
   }
+}
+
+.portrait {
+  height: clamp(250px, 35vw, 500px);
+  width: clamp(250px, 35vw, 500px);
+  animation: morph 8s ease-in-out infinite;
+  background-image: url("../assets/portrait-phan.jpg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: clamp(10px, 1vw, 30px) solid #715df2;
+  border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  position: relative;
+  transition: all 1s ease-in-out;
+}
+@keyframes morph {
+  0% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+}
+
+.title {
+  font-size: 7rem;
+  color: white;
+  text-shadow: 0 0 5px black;
+}
+.wrapper {
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  perspective: 10px;
+}
+header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transform-style: preserve-3d;
+  z-index: -1;
+}
+.background,
+.foreground {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+.background {
+  transform: translateZ(-10px) scale(2);
+}
+.foreground {
+  transform: translateZ(-5px) scale(1.5);
 }

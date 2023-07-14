@@ -24,7 +24,7 @@ const EventList = ({ event }: { event: Event }) => (
         className="object-cover rounded-t-2xl sm:w-2/5 sm:rounded-2xl"
       />
       <div className="p-4 sm:w-3/5 lg:p-8">
-        <div className="flex justify-between">
+        <div className="flex flex-wrap justify-between">
           <p className="text-sm text-neutral-500 font-light">{event.date}</p>
           <p className="text-sm text-neutral-500 font-light">{event.time}</p>
         </div>

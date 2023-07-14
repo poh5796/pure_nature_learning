@@ -6,6 +6,8 @@ import PageWrapper from "./page-wrapper";
 import unsplashDesktop from "../assets/unsplash-desktop.jpg";
 import unsplashMobile from "../assets/unsplash-mobile.jpg";
 import { slideIn } from "./_utils/motion";
+import mountain from "../assets/mountain.png";
+import trees from "../assets/trees.png";
 
 export default function Page() {
   return (
@@ -26,7 +28,14 @@ export default function Page() {
           alt={"Background Image of the Hero Section"}
           className="md:hidden absolute top-0 left-0 z-[-1]"
         />
-        <section className="mb-12 h-screen">
+        {/* <div className="wrapper">
+          <header>
+            <Image src={mountain} alt={""} className="background" />
+            <Image src={trees} alt={""} className="foreground" />
+            <h1 className="title">Welcome!</h1>
+          </header>
+        </div> */}
+        <section className="mb-12 px-[10vw] py-[5vh]">
           <p className="text-5xl text-neutral-8-- drop-shadow-lg font-black">
             大自然学习
           </p>
@@ -36,7 +45,7 @@ export default function Page() {
           <p className="text-neutral-800 py-4">开始你的自然之旅吧！</p>
         </section>
 
-        <section className="py-4">
+        <section className="py-4 px-[10vw] py-[5vh]">
           <p className="text-lg font-bold text-neutral-800 py-4">我们的使命</p>
 
           <div className="flex gap-8">

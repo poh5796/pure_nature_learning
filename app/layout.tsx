@@ -21,9 +21,7 @@ export default function RootLayout({
       <head></head>
       <body>
         <Navbar></Navbar>
-        <div className={`${inter.className} px-[10vw] py-[5vh]`}>
-          {children}
-        </div>
+        <div className={`${inter.className}`}>{children}</div>
         <Footer></Footer>
       </body>
     </html>
