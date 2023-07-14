@@ -1,7 +1,4 @@
-"use client";
-import Image from "next/image";
 import PageWrapper from "../page-wrapper";
-import portraitPhan from "../../assets/portrait-phan.jpg";
 
 export default function About() {
   return (

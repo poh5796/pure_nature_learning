@@ -1,11 +1,10 @@
 "use client";
-
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import bird from "../../assets/logo-bird.png";
-import Image from "next/image";
-import { useState } from "react";
 
 const links = [
   { href: "/about", name: "关于" },
@@ -30,21 +29,25 @@ export default function Navbar() {
   }
 
   function openNav() {
-    const sidenav = document.getElementById("sidenav");
-    if (sidenav) {
-      sidenav.style.height = "100vh";
-      sidenav!.classList.add("glass");
+    if (typeof window !== "undefined") {
+      const sidenav = document.getElementById("sidenav");
+      if (sidenav) {
+        sidenav.style.height = "100vh";
+        sidenav!.classList.add("glass");
+      }
     }
   }
 
   function closeNav() {
-    const sidenav = document.getElementById("sidenav");
-    if (sidenav) {
-      sidenav.style.height = "0px";
+    if (typeof window !== "undefined") {
+      const sidenav = document.getElementById("sidenav");
+      if (sidenav) {
+        sidenav.style.height = "0px";
+      }
+      setTimeout(() => {
+        sidenav?.classList.remove("glass");
+      }, 100);
     }
-    setTimeout(() => {
-      sidenav?.classList.remove("glass");
-    }, 100);
   }
 
   return (
