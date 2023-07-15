@@ -32,8 +32,8 @@ export default function Navbar() {
     if (typeof window !== "undefined") {
       const sidenav = document.getElementById("sidenav");
       if (sidenav) {
-        sidenav.style.height = "100vh";
-        sidenav!.classList.add("glass");
+        sidenav!.style.height = "100vh";
+        sidenav?.classList.add("glass");
       }
     }
   }
@@ -42,7 +42,7 @@ export default function Navbar() {
     if (typeof window !== "undefined") {
       const sidenav = document.getElementById("sidenav");
       if (sidenav) {
-        sidenav.style.height = "0px";
+        sidenav!.style.height = "0px";
       }
       setTimeout(() => {
         sidenav?.classList.remove("glass");
@@ -53,7 +53,7 @@ export default function Navbar() {
   return (
     <>
       <nav id="nav" className="sticky top-0 flex justify-between px-8 py-4">
-        <Link href={"/"}>
+        <Link href={"/"} onClick={() => setToggle(false)}>
           <span className="flex text-lg font-semibold text-neutral-950">
             朴乐 | PURE
             <Image src={bird} alt={"Logo Image"} height={25} width={25} />
