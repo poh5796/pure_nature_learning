@@ -106,7 +106,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
           <div>
             <p className="my-4 text-xl lg:text-2xl text-neutral-700 font-bold">
-              What it's about
+              What it&apos;s about
             </p>
             <div className="w-full md:max-w-[50vw] lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow">
               <p className="px-6 py-8 text-sm lg:text-base text-neutral-600 text-justify">
