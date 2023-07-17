@@ -4,7 +4,7 @@ export default function Page() {
   return (
     <>
       <PageWrapper>
-        <div className="px-[10vw] py-[5vh]">
+        <div className="px-[10vw] md:px-[15vw] py-[5vh]">
           <section className="flex flex-col sm:flex-row">
             <div className="flex justify-center">
               <div className="portrait">

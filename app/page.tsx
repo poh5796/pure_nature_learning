@@ -1,41 +1,37 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
 import PageWrapper from "./page-wrapper";
-import unsplashDesktop from "../assets/unsplash-desktop.jpg";
-import unsplashMobile from "../assets/unsplash-mobile.jpg";
 import { slideIn } from "./_utils/motion";
-import mountain from "../assets/mountain.png";
-import trees from "../assets/trees.png";
+import unsplashDesktop from "../assets/unsplash-desktop.jpg";
+import { benefits } from "./_constants/constants";
 
 export default function Page() {
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
     <>
-      {/* <div className="fadeOut bg-slate-500 h-screen w-screen absolute "></div>
-      <div className="font-[3rem] scaleText flex flex-col justify-center items-center">
-        <p>“把自然融入学习，与自然一起成长”</p>
-        <p>Learn from nature, grow with nature</p>
-      </div> */}
-      <PageWrapper>
+      <div className="fadeout bg-neutral-50 absolute top-0 left-0 h-screen w-screen z-10"></div>
+      <div className="flex justify-center items-center mt-[-60px] h-screen w-screen">
+        <div className="textShadowWhite textScaleDown flex flex-col items-center text-neutral-900 font-black text-2xl md:text-4xl lg:text-5xl z-10">
+          <p>“把自然融入学习，与自然一起成长”</p>
+          <p>Learn from nature, grow with nature</p>
+        </div>
+      </div>
+      <div className="absolute top-0 left-0 h-screen w-screen">
         <Image
+          className="object-cover w-full h-full"
           src={unsplashDesktop}
           alt={"Background Image of the Hero Section"}
-          className="hidden md:block md:absolute md:top-0 md:left-0 md:z-[-1] "
         />
-        <Image
-          src={unsplashMobile}
-          alt={"Background Image of the Hero Section"}
-          className="md:hidden absolute top-0 left-0 z-[-1]"
-        />
-        {/* <div className="wrapper">
-          <header>
-            <Image src={mountain} alt={""} className="background" />
-            <Image src={trees} alt={""} className="foreground" />
-            <h1 className="title">Welcome!</h1>
-          </header>
-        </div> */}
-        <section className="mb-12 px-[10vw] py-[5vh]">
+      </div>
+      <PageWrapper>
+        <section className="mb-12 px-[10vw] md:px-[15vw] py-[5vh]">
           <p className="text-5xl text-neutral-8-- drop-shadow-lg font-black">
             大自然学习
           </p>
@@ -45,33 +41,42 @@ export default function Page() {
           <p className="text-neutral-800 py-4">开始你的自然之旅吧！</p>
         </section>
 
-        <section className="py-4 px-[10vw] py-[5vh]">
+        <section className="py-4 px-[10vw] md:px-[15vw]">
           <p className="text-lg font-bold text-neutral-800 py-4">我们的使命</p>
 
-          <div className="flex gap-8">
-            {benefits.map((benefit) => (
-              <motion.div
-                variants={slideIn("left", "tween", 0.2, 1)}
-                key={benefit.title}
-              >
-                <div className="border flex flex-col justify-center items-center shadow-lg rounded-lg px-4 py-6">
-                  <div className="rounded-t-lg my-4">
-                    <Image
-                      src={benefit.icon}
-                      alt={"Icons representing the benefits of nature learning"}
-                      height={50}
-                      width={50}
-                    />
+          <div className="flex flex-wrap gap-4">
+            {benefits.map((benefit) => {
+              // const icon = benefit.icon
+              return (
+                // <motion.div
+                //   variants={slideIn("left", "tween", 0.2, 1)}
+                //   key={benefit.title}
+                // >
+                <div
+                  key={benefit.title}
+                  className="flex flex-col justify-center items-center  bg-neutral-50 rounded-2xl shadow-md"
+                >
+                  <div>
+                    {/* <a href="">{icon}</a> */}
+                    {/* <Image
+                    src={benefit.icon}
+                    alt={"Icons representing the benefits of nature learning"}
+                    height={50}
+                    width={50}
+                  /> */}
                   </div>
-                  <div className="flex flex-col justify-center items-center">
-                    <p className="text-xl font-semibold text-neutral-900 py-4">
+                  <div className="flex flex-col justify-center items-center px-6 py-4 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+                    <p className="text-xl font-medium text-neutral-800 py-4">
                       {benefit.title}
                     </p>
-                    <p className=" text-neutral-600">{benefit.description}</p>
+                    <p className="text-base text-justify text-neutral-600">
+                      {benefit.description}
+                    </p>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+                // </motion.div>
+              );
+            })}
           </div>
         </section>
 
@@ -82,23 +87,3 @@ export default function Page() {
     </>
   );
 }
-const benefits = [
-  {
-    title: "增强认知和解决问题的能力",
-    description: "在自然环境中学习刺激认知能力和解决问题的技巧",
-    icon: facebook,
-  },
-  {
-    title: "改善身体健康和福祉",
-    description: "在大自然中活动有益于身体健康，促进身心健康",
-    icon: facebook,
-  },
-  {
-    title: "环境意识和保护伦理",
-    description: "自然学习培养环境意识和保护自然的道德观念",
-    icon: facebook,
-  },
-];
-import facebook from "../assets/facebook.png";
-import Navbar from "./_components/navbar";
-import { motion } from "framer-motion";

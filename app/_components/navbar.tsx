@@ -52,11 +52,21 @@ export default function Navbar() {
 
   return (
     <>
-      <nav id="nav" className="sticky top-0 flex justify-between px-8 py-4">
+      <nav
+        id="nav"
+        className="sticky top-0 flex justify-between px-8 py-4 z-50"
+      >
         <Link href={"/"} onClick={() => setToggle(false)}>
           <span className="flex text-lg font-semibold text-neutral-950">
             朴乐 | PURE
-            <Image src={bird} alt={"Logo Image"} height={25} width={25} />
+            <Image
+              src={bird}
+              alt={"Logo Image"}
+              height={0}
+              width={0}
+              sizes="100vw"
+              className="w-[25px] h-[25px]"
+            />
           </span>
         </Link>
 

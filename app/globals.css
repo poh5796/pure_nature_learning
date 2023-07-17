@@ -26,9 +26,6 @@ body {
     rgb(var(--background-start-rgb)); */
 }
 
-#nav {
-  z-index: 2;
-}
 #sidenav {
   height: 0;
   width: 100%;
@@ -65,7 +62,7 @@ body {
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  border: clamp(10px, 1vw, 30px) solid #44453d;
+  border: clamp(8px, 1vw, 16px) solid #44453d;
   border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
   position: relative;
   transition: all 1s ease-in-out;
@@ -80,6 +77,34 @@ body {
   100% {
     border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
   }
+}
+
+.fadeout {
+  animation: fadeout 0.5s 1.5s ease-in forwards;
+}
+@keyframes fadeout {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
+
+.textScaleDown {
+  animation: textScaleDown 0.3s 2s linear forwards;
+}
+@keyframes textScaleDown {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+.textShadowWhite {
+  text-shadow: #fff 0px 0px 4px;
 }
 
 .title {
