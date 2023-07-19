@@ -146,7 +146,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <div className="columns-2 lg:columns-3 gap-8">
               {event.images.map((image, index) => {
                 return (
-                  <FadeInWhenVisible>
+                  <FadeInWhenVisible key={image}>
                     <Image
                       width={0}
                       height={0}

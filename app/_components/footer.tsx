@@ -14,7 +14,11 @@ export default function Footer() {
           <div className="flex flex-col gap-2">
             {contacts.map((contact) => {
               return (
-                <Link href={contact.link} className="flex items-center">
+                <Link
+                  href={contact.link}
+                  key={contact.title}
+                  className="flex items-center"
+                >
                   {contact.image}&nbsp;
                   <span className="text-neutral-500 font-medium">
                     {contact.title}
