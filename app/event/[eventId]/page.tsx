@@ -34,7 +34,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
         console.log(error);
       }
       // mkdir
-      writeFileSync(`./event.ics`, value);
+      // writeFileSync(`./event.ics`, value);
     }
   );
 
@@ -42,14 +42,16 @@ export default function Page({ params }: { params: { eventId: number } }) {
     <>
       <div className="mt-4 lg:px-[15vw] flex flex-col">
         <div className="w-full h-full sm:h-[40vh] lg:h-[50vh] rounded-xl border flex justify-center items-center">
-          <Image
-            src={event.theme}
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-full h-full sm:h-[40vh] lg:h-[50vh] rounded-xl object-cover aspect-video"
-            alt={"Event thumbnail"}
-          />
+          <FadeInWhenVisible>
+            <Image
+              src={event.theme}
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-full sm:h-[40vh] lg:h-[50vh] rounded-xl object-cover aspect-video"
+              alt={"Event theme photo"}
+            />
+          </FadeInWhenVisible>
         </div>
       </div>
 

@@ -17,9 +17,9 @@ export default function Page() {
 
   return (
     <>
-      <div className="fadeout bg-neutral-50 absolute top-0 left-0 h-screen w-full z-10"></div>
+      <div className="fadeout bg-neutral-50 absolute top-0 left-0 h-[95vh] w-full z-10"></div>
 
-      <div className="flex flex-col justify-center items-center mt-[-60px] h-screen w-full relative">
+      <div className="flex flex-col justify-center items-center mt-[-60px] h-[95vh] w-full relative">
         <div className="quote flex flex-col items-center gap-6 font-black text-4xl md:text-5xl lg:text-6xl z-10">
           <p>把自然融入学习</p>
           <p>与自然一起成长</p>
@@ -40,7 +40,7 @@ export default function Page() {
         </motion.div>
       </div>
 
-      <div className="absolute top-0 left-0 h-screen w-full">
+      <div className="absolute top-0 left-0 h-[95vh] w-full">
         <Image
           className="object-cover w-full h-full"
           src={bgHero}
