@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import bird from "../../assets/logo-bird.png";
+import logoBird from "../../assets/logos/logo-bird.png";
 
 const links = [
   { href: "/about", name: "关于" },
@@ -52,15 +52,18 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
+      <motion.nav
         id="nav"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ ease: "easeIn", duration: 0.4, delay: 0.5 }}
         className="sticky top-0 flex justify-between px-8 py-4 z-50"
       >
-        <Link href={"/"} onClick={() => setToggle(false)}>
-          <span className="flex text-lg font-semibold text-neutral-950">
-            朴乐 | PURE
+        <Link href={"/"} onClick={() => setToggle(false)} scroll={false}>
+          <span className="flex items-center text-lg text-neutral-950 font-bold">
+            朴乐 | PURE &nbsp;
             <Image
-              src={bird}
+              src={logoBird}
               alt={"Logo Image"}
               height={0}
               width={0}
@@ -125,8 +128,8 @@ export default function Navbar() {
             ></rect>
           </svg>
         </motion.div>
-      </nav>
-      <div id="sidenav" className={`${toggle ? openNav() : closeNav()}`}>
+      </motion.nav>
+      <div id="sidenav" className={`${toggle ? openNav() : closeNav()} z-40`}>
         <ul className="flex flex-col gap-8 px-8 py-4">
           {links.map((link) => (
             <li key={link.href}>
@@ -136,8 +139,8 @@ export default function Navbar() {
                     link.href == path ? "font-black" : "font-semibold"
                   } text-xl text-neutral-800`}
                   href={link.href}
-                  scroll={false}
                   onClick={() => setToggle(!toggle)}
+                  scroll={false}
                 >
                   {link.name}
                 </Link>

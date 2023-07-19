@@ -37,7 +37,7 @@ function EventCard({ event }: { event: Event }) {
           className=" flex flex-col w-[300px] sm:flex-row sm:w-[600px] sm:h-[300px] lg:w-[700px] lg:h-[350px] bg-neutral-50 rounded-2xl shadow-md hover:shadow-lg"
         >
           <Image
-            src={event.thumbnail}
+            src={event.poster}
             alt={"Event thumbnail"}
             width={300}
             height={150}
@@ -68,7 +68,7 @@ function EventCard({ event }: { event: Event }) {
                 {event.title}
               </p>
               <p className="text-sm text-neutral-500 font-normal">
-                {event.location}
+                {event.location?.name}
               </p>
             </div>
 

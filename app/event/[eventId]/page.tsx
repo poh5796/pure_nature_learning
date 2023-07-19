@@ -1,6 +1,7 @@
 "use client";
 
 import { events } from "@/app/_constants/constants";
+import FadeInWhenVisible from "@/app/fadein-wrapper";
 import { isBefore, parse } from "date-fns";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -12,10 +13,31 @@ import {
   AiOutlineRight,
 } from "react-icons/ai";
 
+import * as ics from "ics";
+import { mkdir, writeFileSync } from "fs";
+
 export default function Page({ params }: { params: { eventId: number } }) {
   const event = events.filter((event) => event.id == params.eventId)[0];
   const currentDate = new Date();
   const eventDate = parse(event.date, "d/M/y", new Date());
+
+  ics.createEvent(
+    {
+      title: "Dinner",
+      description: "Nightly thing I do",
+      busyStatus: "FREE",
+      start: [2018, 1, 15, 6, 30],
+      duration: { minutes: 50 },
+    },
+    (error: any, value: any) => {
+      if (error) {
+        console.log(error);
+      }
+      // mkdir
+      writeFileSync(`./event.ics`, value);
+    }
+  );
+
   return (
     <>
       <div className="mt-4 lg:px-[15vw] flex flex-col">
@@ -51,10 +73,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
               <div className="py-8 flex flex-col w-3/5 sm:w-4/6">
                 <p className="text-sm lg:text-base text-neutral-600">
-                  {event.day}
-                </p>
-                <p className="text-sm lg:text-base text-neutral-600">
-                  {event.date}
+                  {event.day},&nbsp;{event.date}
                 </p>
                 <p className="text-sm lg:text-base text-neutral-600">
                   {event.time}
@@ -71,22 +90,26 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <p className="my-4 text-xl lg:text-2xl text-neutral-700 font-bold">
               Where
             </p>
-            <motion.div
-              whileHover={{ scale: 1.01 }}
-              className="w-full md:max-w-[50vw] lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
+            <Link
+              href={`http://www.google.com/maps/place/${event.location?.lat},${event.location?.long}`}
             >
-              <div className="flex justify-center items-center w-1/5 sm:w-1/6">
-                <AiOutlineEnvironment className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
-              </div>
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                className="w-full md:max-w-[50vw] lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
+              >
+                <div className="flex justify-center items-center w-1/5 sm:w-1/6">
+                  <AiOutlineEnvironment className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
+                </div>
 
-              <p className="py-8 text-sm lg:text-base text-neutral-600  w-3/5 sm:w-4/6">
-                {event.location}
-              </p>
+                <p className="py-8 text-sm lg:text-base text-neutral-600  w-3/5 sm:w-4/6">
+                  {event.location?.name}
+                </p>
 
-              <motion.div className="flex justify-center items-center w-1/5 sm:w-1/6">
-                <AiOutlineRight className="h-[15px] w-[15px] text-neutral-400" />
+                <motion.div className="flex justify-center items-center w-1/5 sm:w-1/6">
+                  <AiOutlineRight className="h-[15px] w-[15px] text-neutral-400" />
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </Link>
           </div>
 
           <div>
@@ -123,17 +146,19 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <div className="columns-2 lg:columns-3 gap-8">
               {event.images.map((image, index) => {
                 return (
-                  <Image
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    key={image}
-                    src={image}
-                    alt={""}
-                    className={`${
-                      index % 3 == 0 ? "aspect-square" : "aspect-video"
-                    } w-full rounded-xl mb-6 object-cover`}
-                  />
+                  <FadeInWhenVisible>
+                    <Image
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      key={image}
+                      src={image}
+                      alt={""}
+                      className={`${
+                        index % 3 == 0 ? "aspect-square" : "aspect-video"
+                      } w-full rounded-xl mb-6 object-cover`}
+                    />
+                  </FadeInWhenVisible>
                 );
               })}
             </div>
