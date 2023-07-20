@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -30,7 +30,7 @@ export default function RootLayout({
           rel="stylesheet"
         /> */}
       </head>
-      <body className="bg-neutral-100">
+      <body className="bg-neutral-100 antialiased">
         <Navbar></Navbar>
         <div className={`${inter.className}`}>{children}</div>
         <Footer></Footer>

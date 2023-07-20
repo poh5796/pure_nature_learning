@@ -7,7 +7,7 @@ export interface Event {
   location: Location;
   description: string;
   age: string;
-  fee: string;
+  fee: number;
   theme: string;
   poster: string;
   agenda: string;

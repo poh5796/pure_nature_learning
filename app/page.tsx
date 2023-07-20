@@ -15,6 +15,10 @@ export default function Page() {
     return () => {};
   }, []);
 
+  // function scroll() {
+  //   document.getElementById("section1")?.scrollIntoView({ behavior: "smooth" });
+  // }
+
   return (
     <>
       <div className="fadeout bg-neutral-50 absolute top-0 left-0 h-[95vh] w-full z-10"></div>
@@ -34,9 +38,7 @@ export default function Page() {
           transition={{ duration: 0.2, delay: 0.8 }}
           className="flex justify-center absolute bottom-20 z-10"
         >
-          <Link href={"#section1"} scroll={false}>
-            Click me
-          </Link>
+          <a href="#section1">Click me</a>
         </motion.div>
       </div>
 
@@ -51,7 +53,7 @@ export default function Page() {
       <PageWrapper>
         <div className="bg-gradient-animate">
           <div id="section1" className="h-[60px]"></div>
-          <section className="px-[10vw] md:px-[15vw] py-[10vh]">
+          <section className="px-[10vw] md:px-[15vw] py-[5vh]">
             <p className="text-5xl text-neutral-8-- drop-shadow-lg font-black">
               大自然学习
             </p>

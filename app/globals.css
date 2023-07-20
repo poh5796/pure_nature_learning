@@ -16,7 +16,9 @@
     --background-end-rgb: 0, 0, 0;
   }
 } */
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   color: rgb(var(--foreground-rgb));
   scroll-behavior: smooth;
@@ -41,17 +43,21 @@ body {
 .glass {
   text-shadow: #fff 0px 0px 4px;
   background-color: rgba(200, 200, 200, 0.2);
-  -webkit-animation: blur 0.2s ease 0s forwards;
-  animation: blur 0.2s ease-in 0s forwards;
+  -webkit-animation: blur 0.4s ease 0s forwards;
+  animation: blur 0.4s ease-in 0s forwards;
+}
+.unglass {
+  -webkit-animation: blur 0.4s ease 0s reverse;
+  animation: blur 0.4s ease-in 0s reverse;
 }
 @keyframes blur {
   0% {
-    -webkit-backdrop-filter: saturate(0%) blur(0px);
-    backdrop-filter: saturate(0%) blur(0px);
+    -webkit-backdrop-filter: saturate(100%) blur(0px);
+    backdrop-filter: saturate(100%) blur(0px);
   }
   100% {
-    -webkit-backdrop-filter: saturate(180%) blur(10px);
-    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(200%) blur(10px);
+    backdrop-filter: saturate(200%) blur(10px);
   }
 }
 
