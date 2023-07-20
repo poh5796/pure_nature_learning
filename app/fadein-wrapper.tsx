@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 export default function FadeInWhenVisible({ children }: { children: any }) {
   return (
     <motion.div
+      className="w-full h-full"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}

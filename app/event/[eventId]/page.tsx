@@ -22,6 +22,10 @@ export default function Page({ params }: { params: { eventId: number } }) {
   const eventDate = format(event.start, "d/M/Y");
   const eventStart = format(event.start, "h:mm aaa");
   const eventEnd = format(event.end, "h:mm aaa");
+  const eventFullStart = format(event.start, "yyyyMMdd'T'HHmmss");
+  const eventFullEnd = format(event.end, "yyyyMMdd'T'HHmmss");
+  console.log(eventFullStart);
+  console.log(eventFullEnd);
   const year = event.start.getFullYear();
   const month = event.start.getMonth() + 1;
   const day = event.start.getDate();
@@ -47,44 +51,47 @@ export default function Page({ params }: { params: { eventId: number } }) {
       location: `${event.location.name}`,
       organizer: { name: "朴乐 Pure Nature Learning" },
       url: `https://purelearning.netlify.app${usePathname()}`,
-      alarms: [
-        {
-          action: "audio",
-          trigger: {
-            hours: duration.hours,
-            minutes: duration.minutes,
-            before: true,
-          },
-          repeat: 1,
-        },
-      ],
+      // alarms: [
+      //   {
+      //     action: "audio",
+      //     trigger: {
+      //       hours: duration.hours,
+      //       minutes: duration.minutes,
+      //       before: true,
+      //     },
+      //     repeat: 1,
+      //   },
+      // ],
     },
     (error: any, value: any) => {
       if (error) {
         console.error(error);
       }
-      console.log(value);
-      icsEvent = btoa(encodeURIComponent(value));
+      icsEvent = value;
     }
   );
 
-  function openCalendar() {
-    const icsContentBase64 = icsEvent;
-    const icsDataUri = `data:text/calendar;base64,${icsContentBase64}`;
-    window.location.href = icsDataUri;
+  function setReminder() {
+    const icsContent = icsEvent;
+    const icsDataUri = `data:text/calendar;charset=utf8,${encodeURIComponent(
+      icsContent
+    )}`;
+
+    window.open(icsDataUri);
   }
+
   return (
     <>
-      <div className="mt-4 lg:px-[15vw] flex flex-col">
-        <div className="w-full h-full sm:h-[40vh] lg:h-[50vh] rounded-xl flex justify-center items-center ">
-          {/* Remove "relative" for fullscreen effect */}
+      <div className="flex flex-col md:px-[15vw]">
+        <div className="w-full h-[40vh] lg:h-[50vh] rounded-xl flex justify-center items-center ">
+          {/* Add/Remove "relative" for background effect */}
           <FadeInWhenVisible>
             <Image
               src={event.theme}
               width={0}
               height={0}
               sizes="100vw"
-              className="w-full h-full sm:h-[40vh] lg:h-[50vh] rounded-xl object-cover aspect-video"
+              className="w-full h-full rounded-xl object-cover aspect-video"
               alt={"Event theme photo"}
             />
           </FadeInWhenVisible>
@@ -109,8 +116,15 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
               When
             </p>
+            <a
+              target="_blank"
+              className="button"
+              href={`https://calendar.google.com/calendar/render?action=TEMPLATE&dates=${eventFullStart}/${eventFullEnd}&text=${event.title}&location=${event.location.name}&ctz=Asia/Kuala_Lumpur`}
+            >
+              Add to Google Calendar
+            </a>
             <motion.div
-              onClick={() => openCalendar()}
+              onClick={() => setReminder()}
               whileHover={{ scale: 1.02 }}
               className="w-full md:max-w-[50vw] lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
             >
