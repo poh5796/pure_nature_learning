@@ -5,7 +5,7 @@ import PageWrapper from "../page-wrapper";
 import { events } from "../_constants/constants";
 import { Event } from "../_constants/model";
 import { motion } from "framer-motion";
-import { isBefore, parse } from "date-fns";
+import { format, isBefore, parse } from "date-fns";
 
 export default function Page() {
   return (
@@ -27,8 +27,9 @@ export default function Page() {
 
 function EventCard({ event }: { event: Event }) {
   const currentDate = new Date();
-  const eventDate = parse(event.date, "d/M/y", new Date());
-
+  const eventDate = format(event.start, "d/M/Y");
+  const eventStart = format(event.start, "h:mm aaa");
+  const eventEnd = format(event.end, "h:mm aaa");
   return (
     <>
       <Link href={`/event/${event.id}`}>
@@ -38,25 +39,23 @@ function EventCard({ event }: { event: Event }) {
         >
           <Image
             src={event.poster}
-            alt={"Event thumbnail"}
+            alt={"Event poster"}
             width={300}
             height={150}
             className="object-cover rounded-t-2xl sm:w-2/5 sm:rounded-2xl"
           />
           <div className="px-6 py-4 sm:w-3/5 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
             <div className="flex flex-wrap justify-between">
+              <p className="text-sm text-neutral-500 font-light">{eventDate}</p>
               <p className="text-sm text-neutral-500 font-light">
-                {event.date}
-              </p>
-              <p className="text-sm text-neutral-500 font-light">
-                {event.time}
+                {eventStart} - {eventEnd}
               </p>
             </div>
 
             <div className="flex justify-end h-[32px]">
               <p
                 className={`${
-                  isBefore(currentDate, eventDate) ? "inline-block" : "hidden"
+                  isBefore(currentDate, event.start) ? "inline-block" : "hidden"
                 } text-emerald-600  bg-green-100  text-xs rounded-lg px-2 py-1 mt-2`}
               >
                 Upcoming

@@ -60,7 +60,7 @@ export default function Navbar() {
         className="sticky top-0 flex justify-between px-8 py-4 z-50"
       >
         <Link href={"/"} onClick={() => setToggle(false)} scroll={false}>
-          <span className="flex items-center text-lg text-neutral-950 font-bold">
+          <span className="flex items-center text-lg text-neutral-900 font-bold text-shadow">
             朴乐 | PURE &nbsp;
             <Image
               src={logoBird}
@@ -79,8 +79,8 @@ export default function Navbar() {
               <motion.div whileHover={{ scale: 1.1 }}>
                 <Link
                   className={`${
-                    link.href == path ? "font-black" : "font-semibold"
-                  } text-sm text-neutral-800`}
+                    path == link.href ? "font-black" : "font-bold"
+                  } text-sm text-neutral-900 text-shadow`}
                   href={link.href}
                   scroll={false}
                 >
@@ -130,14 +130,14 @@ export default function Navbar() {
         </motion.div>
       </motion.nav>
       <div id="sidenav" className={`${toggle ? openNav() : closeNav()} z-40`}>
-        <ul className="flex flex-col gap-8 px-8 py-4">
+        <ul className="flex flex-col gap-12 px-8 py-4">
           {links.map((link) => (
             <li key={link.href}>
               <motion.div whileHover={{ scale: 1.05, x: 15, y: -3 }}>
                 <Link
                   className={`${
                     link.href == path ? "font-black" : "font-semibold"
-                  } text-xl text-neutral-800`}
+                  } text-xl text-neutral-900`}
                   href={link.href}
                   onClick={() => setToggle(!toggle)}
                   scroll={false}

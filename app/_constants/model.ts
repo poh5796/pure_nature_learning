@@ -2,8 +2,8 @@ export interface Event {
   id: number;
   title: string;
   day: string;
-  date: string;
-  time: string;
+  start: Date;
+  end: Date;
   location: Location;
   description: string;
   age: string;

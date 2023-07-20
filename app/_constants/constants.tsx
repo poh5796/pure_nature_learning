@@ -12,24 +12,22 @@ export const contacts: Contact[] = [
   {
     title: "Facebook",
     link: "https://www.facebook.com/purenaturelearning",
-    image: <AiFillFacebook className="w-[25px] h-[25px] text-blue-600" />,
+    image: <AiFillFacebook className="w-[25px] h-[25px]" />,
   },
   {
     title: "WhatsApp",
     link: "https://wa.me/60189591312",
-    image: <AiOutlineWhatsApp className="w-[25px] h-[25px] text-emerald-500" />,
+    image: <AiOutlineWhatsApp className="w-[25px] h-[25px]" />,
   },
   {
     title: "Instagram",
     link: "https://www.instagram.com/purenaturelearning",
-    image: (
-      <AiOutlineInstagram className="w-[25px] h-[25px] text-fuchsia-500" />
-    ),
+    image: <AiOutlineInstagram className="w-[25px] h-[25px]" />,
   },
   {
     title: "Xiaohongshu",
     link: "https://tinyurl.com/5n8z62hr",
-    image: <AiFillBook className="w-[25px] h-[25px] text-rose-500" />,
+    image: <AiFillBook className="w-[25px] h-[25px]" />,
   },
 ];
 
@@ -71,8 +69,8 @@ export const events: Event[] = [
     id: 0,
     title: "纸飞机 Paper Plane",
     day: "星期日 Sunday",
-    date: "7/8/2022",
-    time: "4:30pm(华) 5:30pm(英) 6:30pm(华)",
+    start: new Date(2022, 7, 7, 16, 30),
+    end: new Date(2022, 7, 7, 19, 30),
     location: {
       name: "Taman Metropolitan, Kepong",
       lat: "3.227339779268691",
@@ -117,8 +115,8 @@ export const events: Event[] = [
     id: 1,
     title: "追风 Chasing Winds",
     day: "星期日 Sunday",
-    date: "21/8/2022",
-    time: "2:00pm - 6:00pm",
+    start: new Date(2022, 7, 21, 14, 0),
+    end: new Date(2022, 7, 21, 18, 0),
     location: {
       name: "Taman Metropolitan, Kepong",
       lat: "3.227339779268691",
@@ -137,8 +135,8 @@ export const events: Event[] = [
     id: 2,
     title: "小小云朵收藏家 Little Cloud Experts",
     day: "星期六 Saturday",
-    date: "24/9/2023",
-    time: "2:00pm - 6:00pm",
+    start: new Date(2023, 8, 24, 14, 0),
+    end: new Date(2023, 8, 24, 18, 0),
     location: {
       name: "Anjung Floria, Putrajaya",
       lat: "2.913005533935713",

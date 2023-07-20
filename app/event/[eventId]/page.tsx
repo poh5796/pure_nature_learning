@@ -2,7 +2,7 @@
 
 import { events } from "@/app/_constants/constants";
 import FadeInWhenVisible from "@/app/fadein-wrapper";
-import { isBefore, parse } from "date-fns";
+import { format, intervalToDuration, isBefore } from "date-fns";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,34 +14,70 @@ import {
 } from "react-icons/ai";
 
 import * as ics from "ics";
-import { mkdir, writeFileSync } from "fs";
+import { usePathname } from "next/navigation";
 
 export default function Page({ params }: { params: { eventId: number } }) {
   const event = events.filter((event) => event.id == params.eventId)[0];
   const currentDate = new Date();
-  const eventDate = parse(event.date, "d/M/y", new Date());
+  const eventDate = format(event.start, "d/M/Y");
+  const eventStart = format(event.start, "h:mm aaa");
+  const eventEnd = format(event.end, "h:mm aaa");
+  const year = event.start.getFullYear();
+  const month = event.start.getMonth() + 1;
+  const day = event.start.getDate();
+  const startHour = event.start.getHours();
+  const startMinute = event.start.getMinutes();
+  const endHour = event.end.getHours();
+  const endMinute = event.end.getMinutes();
+  const duration = intervalToDuration({
+    start: 0,
+    end: event.end.getTime() - event.start.getTime(),
+  });
+  let icsEvent = "";
 
   ics.createEvent(
     {
-      title: "Dinner",
-      description: "Nightly thing I do",
-      busyStatus: "FREE",
-      start: [2018, 1, 15, 6, 30],
-      duration: { minutes: 50 },
+      title: `${event.title}`,
+      start: [year, month, day, startHour, startMinute],
+      startInputType: "local",
+      startOutputType: "local",
+      end: [year, month, day, endHour, endMinute],
+      endInputType: "local",
+      endOutputType: "local",
+      location: `${event.location.name}`,
+      organizer: { name: "朴乐 Pure Nature Learning" },
+      url: `https://purelearning.netlify.app${usePathname()}`,
+      alarms: [
+        {
+          action: "audio",
+          trigger: {
+            hours: duration.hours,
+            minutes: duration.minutes,
+            before: true,
+          },
+          repeat: 1,
+        },
+      ],
     },
     (error: any, value: any) => {
       if (error) {
-        console.log(error);
+        console.error(error);
       }
-      // mkdir
-      // writeFileSync(`./event.ics`, value);
+      console.log(value);
+      icsEvent = btoa(encodeURIComponent(value));
     }
   );
 
+  function openCalendar() {
+    const icsContentBase64 = icsEvent;
+    const icsDataUri = `data:text/calendar;base64,${icsContentBase64}`;
+    window.location.href = icsDataUri;
+  }
   return (
     <>
       <div className="mt-4 lg:px-[15vw] flex flex-col">
-        <div className="w-full h-full sm:h-[40vh] lg:h-[50vh] rounded-xl border flex justify-center items-center">
+        <div className="w-full h-full sm:h-[40vh] lg:h-[50vh] rounded-xl flex justify-center items-center ">
+          {/* Remove "relative" for fullscreen effect */}
           <FadeInWhenVisible>
             <Image
               src={event.theme}
@@ -52,20 +88,29 @@ export default function Page({ params }: { params: { eventId: number } }) {
               alt={"Event theme photo"}
             />
           </FadeInWhenVisible>
+          <Image
+            src={event.theme}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-full object-cover aspect-video absolute -z-10 blur"
+            alt={"Event theme photo"}
+          />
         </div>
       </div>
 
       <div className="px-[10vw] md:px-[15vw] py-[5vh] flex flex-col">
-        <p className="mt-8 mb-16 text-3xl md:text-4xl lg:text-5xl text-neutral-800 font-black">
+        <p className="mt-8 mb-16 text-3xl md:text-4xl lg:text-5xl text-neutral-800 font-black text-shadow">
           {event.title}
         </p>
 
         <div className="flex flex-col gap-12">
           <div>
-            <p className="my-4 text-xl lg:text-2xl text-neutral-700 font-bold">
+            <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
               When
             </p>
             <motion.div
+              onClick={() => openCalendar()}
               whileHover={{ scale: 1.02 }}
               className="w-full md:max-w-[50vw] lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
             >
@@ -75,10 +120,10 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
               <div className="py-8 flex flex-col w-3/5 sm:w-4/6">
                 <p className="text-sm lg:text-base text-neutral-600">
-                  {event.day},&nbsp;{event.date}
+                  {event.day},&nbsp;{eventDate}
                 </p>
                 <p className="text-sm lg:text-base text-neutral-600">
-                  {event.time}
+                  {eventStart} - {eventEnd}
                 </p>
               </div>
 
@@ -89,7 +134,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
           </div>
 
           <div>
-            <p className="my-4 text-xl lg:text-2xl text-neutral-700 font-bold">
+            <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
               Where
             </p>
             <Link
@@ -115,7 +160,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
           </div>
 
           <div>
-            <p className="my-4 text-xl lg:text-2xl text-neutral-700 font-bold">
+            <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
               Who
             </p>
             <div className="w-full md:max-w-[50vw] lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow">
@@ -130,7 +175,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
           </div>
 
           <div>
-            <p className="my-4 text-xl lg:text-2xl text-neutral-700 font-bold">
+            <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
               What it&apos;s about
             </p>
             <div className="w-full md:max-w-[50vw] lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow">
@@ -141,7 +186,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
           </div>
 
           <div className={`${event.images.length > 0 ? "block" : "hidden"}`}>
-            <p className="my-4 text-xl lg:text-2xl text-neutral-700 font-bold">
+            <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
               Gallery
             </p>
             {/* MASONRY LAYOUT */}
@@ -170,7 +215,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
           <Link
             className={`${
-              isBefore(currentDate, eventDate) ? "block" : "hidden"
+              isBefore(currentDate, event.start) ? "block" : "hidden"
             } border border-neutral-600 rounded-xl p-4 w-fit`}
             href={event.booking}
           >
