@@ -81,7 +81,7 @@ export const events: Event[] = [
     age: "3 - 12 years old",
     fee: 0,
     theme: "https://source.unsplash.com/2c9ffiPlD9Q",
-    poster: "",
+    poster: "https://source.unsplash.com/6kajEqr84iY",
     agenda: "",
     images: [
       "https://tinyurl.com/3ym5dub3",
@@ -128,7 +128,7 @@ export const events: Event[] = [
     age: "4 - 12 years old",
     fee: 298,
     theme: "https://source.unsplash.com/D0tD6n3Ao8E",
-    poster: "",
+    poster: "https://source.unsplash.com/6kajEqr84iY",
     agenda: "",
     images: [],
     booking: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
@@ -149,7 +149,7 @@ export const events: Event[] = [
     age: "3 - 12 years old",
     fee: 298,
     theme: "https://source.unsplash.com/PEm_sLmJT-w",
-    poster: "",
+    poster: "https://source.unsplash.com/6kajEqr84iY",
     agenda: "",
     images: [
       "https://tinyurl.com/jm3jdj56",

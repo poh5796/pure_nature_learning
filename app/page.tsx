@@ -9,6 +9,7 @@ import { slideIn } from "./_utils/motion";
 import bgHero from "../assets/bgHero.jpg";
 import { benefits } from "./_constants/constants";
 import Link from "next/link";
+import { AiOutlineCaretDown } from "react-icons/ai";
 
 export default function Page() {
   useEffect(() => {
@@ -36,9 +37,27 @@ export default function Page() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2, delay: 0.8 }}
-          className="flex justify-center absolute bottom-20 z-10"
+          className="flex flex-col justify-center items-center absolute bottom-20 z-10"
         >
-          <a href="#section1">Click me</a>
+          <motion.div
+            initial={{ y: -30 }}
+            animate={{ y: 0 }}
+            transition={{
+              type: "spring",
+              bounce: 0.4,
+              // stiffness: 50,
+              // damping: 0,
+              // mass: 1,
+              duration: 1,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          >
+            <AiOutlineCaretDown />
+          </motion.div>
+          <a href="#section1" className="text-shadow text-neutral-800">
+            Click me
+          </a>
         </motion.div>
       </div>
 

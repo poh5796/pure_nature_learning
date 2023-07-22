@@ -78,7 +78,10 @@ export default function Page({ params }: { params: { eventId: number } }) {
   return (
     <>
       <div className="flex flex-col md:px-[15vw]">
-        <div className="w-full h-[45vh] lg:h-[50vh] rounded-xl flex justify-center items-center ">
+        <div
+          className="w-full h-[4
+          vh] lg:h-[50vh] rounded-xl flex justify-center items-center "
+        >
           {/* Add/Remove "relative" for background effect */}
           <FadeInWhenVisible>
             <Image
