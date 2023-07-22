@@ -13,7 +13,6 @@ import {
   AiOutlineRight,
   AiOutlineStar,
 } from "react-icons/ai";
-
 import * as ics from "ics";
 import { usePathname } from "next/navigation";
 
@@ -75,6 +74,37 @@ export default function Page({ params }: { params: { eventId: number } }) {
     }
   }
 
+  const googleMapsURL = "comgooglemaps://";
+  window.location.href = googleMapsURL;
+
+  function checkGoogleMaps() {
+    const googleMapsURL = "comgooglemaps://";
+    window.location.href = googleMapsURL;
+
+    setTimeout(() => {
+      // If the control reaches here, Google Maps is not installed
+      console.log("Google Maps not found.");
+    }, 1000);
+  }
+
+  function checkWaze() {
+    const wazeURL = "waze://";
+    window.location.href = wazeURL;
+
+    setTimeout(() => {
+      // If the control reaches here, Waze is not installed
+      console.log("Waze not found.");
+    }, 100);
+  }
+
+  function openGoogleMaps() {
+    window.location.href = `http://www.google.com/maps/place/${event.location?.lat},${event.location?.long}`;
+  }
+
+  function openWaze() {
+    window.location.href = `https://waze.com/ul/ll=${event.location?.lat},${event.location?.long}&navigate=yes`;
+  }
+
   return (
     <>
       <div className="flex flex-col md:px-[15vw]">
@@ -105,6 +135,8 @@ export default function Page({ params }: { params: { eventId: number } }) {
       </div>
 
       <div className="px-[10vw] md:px-[15vw] py-[5vh] flex flex-col">
+        <button onClick={() => checkGoogleMaps()}>Open Google Maps</button>
+        <button onClick={() => checkWaze()}>Open Waze</button>
         <p className="mt-8 mb-16 text-3xl md:text-4xl lg:text-5xl text-neutral-800 font-black text-shadow">
           {event.title}
         </p>
@@ -115,6 +147,8 @@ export default function Page({ params }: { params: { eventId: number } }) {
               <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
                 When
               </p>
+
+              {/* Calendar, setReminder*/}
               <motion.div
                 onClick={() => setReminder()}
                 whileHover={{ scale: 1.02 }}
@@ -172,26 +206,25 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
               Where
             </p>
-            <Link
-              href={`http://www.google.com/maps/place/${event.location?.lat},${event.location?.long}`}
+
+            {/* Location, redirect to Google Map/Waze*/}
+            <motion.div
+              onClick={() => checkGoogleMaps()}
+              whileHover={{ scale: 1.01 }}
+              className="w-full  lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
             >
-              <motion.div
-                whileHover={{ scale: 1.01 }}
-                className="w-full  lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
-              >
-                <div className="flex justify-center items-center w-1/5 sm:w-1/6">
-                  <AiOutlineEnvironment className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
-                </div>
+              <div className="flex justify-center items-center w-1/5 sm:w-1/6">
+                <AiOutlineEnvironment className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
+              </div>
 
-                <p className="py-8 text-sm lg:text-base text-neutral-600  w-3/5 sm:w-4/6">
-                  {event.location?.name}
-                </p>
+              <p className="py-8 text-sm lg:text-base text-neutral-600  w-3/5 sm:w-4/6">
+                {event.location?.name}
+              </p>
 
-                <motion.div className="flex justify-center items-center w-1/5 sm:w-1/6">
-                  <AiOutlineRight className="h-[15px] w-[15px] text-neutral-400" />
-                </motion.div>
+              <motion.div className="flex justify-center items-center w-1/5 sm:w-1/6">
+                <AiOutlineRight className="h-[15px] w-[15px] text-neutral-400" />
               </motion.div>
-            </Link>
+            </motion.div>
           </div>
 
           <div>
@@ -228,12 +261,11 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <div className="columns-2 lg:columns-3 gap-8">
               {event.images.map((image, index) => {
                 return (
-                  <FadeInWhenVisible key={image}>
+                  <FadeInWhenVisible key={index}>
                     <Image
                       width={0}
                       height={0}
                       sizes="100vw"
-                      key={image}
                       src={image}
                       alt={""}
                       className={`${
@@ -248,13 +280,13 @@ export default function Page({ params }: { params: { eventId: number } }) {
         </div>
       </div>
 
-      <motion.div className="fixed bottom-0 left-0 right-0 w-full flex justify-around drop-shadow-2xl lg:hidden bg-neutral-50 rounded-xl ">
+      <motion.div className="fixed bottom-0 left-0 right-0 w-full flex justify-around drop-shadow-2xl lg:hidden bg-neutral-50">
         <div className="flex justify-center items-center ">
           <AiOutlineStar className="h-[25px] w-[25px] text-yellow-500" />
         </div>
 
         <p className="py-10 text-lg text-neutral-800  font-bold ">
-          RM {event.fee == 0 ? "Free admission" : event.fee.toFixed(2)}
+          {event.fee == 0 ? "Free admission" : "RM " + event.fee.toFixed(2)}
         </p>
 
         <motion.div className="flex justify-center items-center ">

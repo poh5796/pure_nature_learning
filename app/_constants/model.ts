@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface Event {
   id: number;
   title: string;
@@ -9,9 +11,9 @@ export interface Event {
   age: string;
   fee: number;
   theme: string;
-  poster: string;
+  poster: StaticImageData;
   agenda: string;
-  images: string[];
+  images: StaticImageData[];
   booking: string;
 }
 interface Location {
