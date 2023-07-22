@@ -3,22 +3,15 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
 import PageWrapper from "./page-wrapper";
-import { slideIn } from "./_utils/motion";
 import bgHero from "../assets/bgHero.jpg";
 import { benefits } from "./_constants/constants";
-import Link from "next/link";
 import { AiOutlineCaretDown } from "react-icons/ai";
 
 export default function Page() {
   useEffect(() => {
     return () => {};
   }, []);
-
-  // function scroll() {
-  //   document.getElementById("section1")?.scrollIntoView({ behavior: "smooth" });
-  // }
 
   return (
     <>
