@@ -3,7 +3,6 @@ import { StaticImageData } from "next/image";
 export interface Event {
   id: number;
   title: string;
-  day: string;
   start: Date;
   end: Date;
   location: Location;

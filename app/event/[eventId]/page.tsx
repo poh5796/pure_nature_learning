@@ -31,6 +31,16 @@ export default function Page({ params }: { params: { eventId: number } }) {
   const startMinute = event.start.getMinutes();
   const endHour = event.end.getHours();
   const endMinute = event.end.getMinutes();
+  const eventDay = event.start.getDay();
+  const daysInWeek: string[] = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   let os = "";
   if (navigator.userAgent.indexOf("Win") != -1) os = "Windows";
@@ -134,7 +144,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
         </div>
       </div>
 
-      <div className="px-[10vw] md:px-[15vw] py-[5vh] flex flex-col">
+      <div className="px-[10vw] md:px-[15vw] xl:px-[20vw] py-[5vh] flex flex-col">
         <button onClick={() => checkGoogleMaps()}>Open Google Maps</button>
         <button onClick={() => checkWaze()}>Open Waze</button>
         <p className="mt-8 mb-16 text-3xl md:text-4xl lg:text-5xl text-neutral-800 font-black text-shadow">
@@ -160,7 +170,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
                 <div className="py-8 flex flex-col w-3/5 sm:w-4/6">
                   <p className="text-sm lg:text-base text-neutral-600">
-                    {event.day},&nbsp;{eventDate}
+                    {daysInWeek[eventDay]},&nbsp;{eventDate}
                   </p>
                   <p className="text-sm lg:text-base text-neutral-600">
                     {eventStart} - {eventEnd}

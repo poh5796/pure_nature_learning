@@ -224,7 +224,6 @@ export const events: Event[] = [
   {
     id: 0,
     title: "纸飞机 Paper Plane",
-    day: "星期日 Sunday",
     start: new Date(2022, 7, 7, 16, 30),
     end: new Date(2022, 7, 7, 19, 30),
     location: {
@@ -273,7 +272,6 @@ export const events: Event[] = [
   {
     id: 1,
     title: "追风 Chasing Winds",
-    day: "星期日 Sunday",
     start: new Date(2022, 7, 21, 14, 0),
     end: new Date(2022, 7, 21, 18, 0),
     location: {
@@ -338,9 +336,8 @@ export const events: Event[] = [
   {
     id: 2,
     title: "小小云朵收藏家 Little Cloud Experts",
-    day: "星期六 Saturday",
-    start: new Date(2023, 8, 24, 14, 0),
-    end: new Date(2023, 8, 24, 18, 0),
+    start: new Date(2022, 8, 24, 14, 0),
+    end: new Date(2022, 8, 24, 18, 0),
     location: {
       name: "Anjung Floria, Putrajaya",
       lat: "2.913005533935713",

@@ -7,17 +7,30 @@ import { Event } from "../_constants/model";
 import { motion } from "framer-motion";
 import { format, isBefore } from "date-fns";
 import { useState } from "react";
-import { AiOutlineSearch, AiOutlineSwapLeft } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineSearch,
+  AiOutlineSwapLeft,
+} from "react-icons/ai";
 import FadeInWhenVisible from "../fadein-wrapper";
 
 export default function Page() {
-  // Initialize sortedEvents in descending order by date
-  const [sortedEvents, setSortedEvents] = useState<Event[]>(
-    events.sort(
-      (a, b) => new Date(b.start).getTime() - new Date(a.start).getTime()
-    )
+  const initialEvents = events.sort(
+    (a, b) => new Date(b.start).getTime() - new Date(a.start).getTime()
   );
+  // Initialize sortedEvents in descending order by date
+  const [sortedEvents, setSortedEvents] = useState<Event[]>(initialEvents);
   const [sortType, setSortType] = useState("Sort");
+  const [searchInput, setSearchInput] = useState("");
+
+  function searchByInput(searchInput: string) {
+    let filteredEvents: Event[];
+    if (searchInput == "") filteredEvents = initialEvents;
+    filteredEvents = events.filter((event) =>
+      event.title.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    setSortedEvents(filteredEvents);
+  }
 
   //Sort events by useState hook and shallow copy of events array to trigger rerendering
   function sortEvents(sortType: string) {
@@ -65,20 +78,41 @@ export default function Page() {
   return (
     <div className="py-[5vh]">
       <PageWrapper>
-        <div className="px-[10vw] md:px-[15vw] flex gap-2 md:gap-4 xl:gap-6 relative">
+        <div className="px-[10vw] md:px-[15vw] xl:px-[20vw] flex gap-2 md:gap-4 xl:gap-6 relative">
           <div className="flex justify-center items-center relative w-full focus:border-blue-500 focus:ring-blue-500">
             <input
               type="text"
               placeholder="Search"
+              value={searchInput}
+              onChange={(event) => {
+                setSearchInput(event.target.value);
+                searchByInput(event.target.value);
+              }}
               className="rounded-xl border border-neutral-200 bg-neutral-50 text-neutral-700 text-sm lg:text-base w-full px-4 py-2"
             />
-            <motion.button
-              whileHover={{ scale: 1.07 }}
-              whileFocus={{ scale: 1.07 }}
-              className="absolute right-0 border-l-2 px-4"
+
+            <motion.div className="absolute right-0 mx-4">
+              <AiOutlineSearch
+                className={`${
+                  searchInput === "" ? "block" : "hidden"
+                } text-neutral-300 w-[20px] h-[20px] lg:w-[25px] lg:h-[25px]`}
+              />
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              onClick={() => {
+                setSearchInput("");
+                searchByInput("");
+              }}
+              className="absolute right-0 mx-4"
             >
-              <AiOutlineSearch className=" text-neutral-400 w-[20px] h-[20px] lg:w-[25px] lg:h-[25px] " />
-            </motion.button>
+              <AiOutlineClose
+                className={`${
+                  searchInput === "" ? "hidden" : "block"
+                } text-neutral-400 w-[20px] h-[20px] lg:w-[25px] lg:h-[25px] hover:text-neutral-600`}
+              />
+            </motion.div>
           </div>
 
           <div className="relative">
@@ -88,7 +122,7 @@ export default function Page() {
               whileFocus={{ scale: 1.07 }}
               className="flex items-center px-4 py-2 bg-neutral-50 rounded-xl border border-neutral-200 min-w-max"
             >
-              <span className="mx-2 hidden sm:block text-sm lg:text-base text-neutral-500">
+              <span className="mx-2 hidden sm:block text-sm lg:text-base text-neutral-400">
                 {sortType}
               </span>
 
@@ -101,10 +135,10 @@ export default function Page() {
 
             <motion.div
               id="popoverContent"
-              whileInView={{ translateY: 70 }}
+              whileInView={{ translateY: 75 }}
               className="hidden p-2 sm:px-4 bg-neutral-50 shadow-md rounded-xl border absolute bottom-0 right-0 min-w-max sm:w-full"
             >
-              <div className="flex flex-col gap-2 text-sm text-neutral-600 hover:cursor-pointer">
+              <div className="flex flex-col gap-2 text-sm lg:text-base text-neutral-600 hover:cursor-pointer">
                 <p onClick={() => sortEvents("asc")}>Date Asc</p>
                 <p onClick={() => sortEvents("desc")}>Date Desc</p>
               </div>
@@ -112,11 +146,11 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="px-[10vw] md:px-[15vw]">
+        <div className="px-[10vw] md:px-[15vw] xl:px-[20vw]">
           <p className="my-8 lg:my-12 font-black text-2xl lg:text-4xl text-neutral-800">
             Events
           </p>
-          <div className="flex flex-col items-center gap-8 lg:gap-10 xl:gap-12">
+          <div className="flex flex-col items-center gap-8 lg:gap-12 xl:gap-16">
             {sortedEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
@@ -130,9 +164,19 @@ export default function Page() {
 function EventCard({ event }: { event: Event }) {
   const currentDate = new Date();
   const eventDate = format(event.start, "d/M/Y");
-  const eventDay = format(event.start.getDay(), "EEEE");
   const eventStart = format(event.start, "h:mmaaa");
   const eventEnd = format(event.end, "h:mmaaa");
+  const eventDay = event.start.getDay();
+  const daysInWeek: string[] = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
   return (
     <>
       <FadeInWhenVisible>
@@ -149,13 +193,13 @@ function EventCard({ event }: { event: Event }) {
               width={0}
               height={0}
               sizes="100vw"
-              className="object-cover rounded-t-xl sm:rounded-xl w-full h-auto sm:w-2/5 lg:w-2/6 aspect-square lg:aspect-[3/4]"
+              className="object-cover rounded-t-xl sm:rounded-xl w-full h-auto sm:w-2/5 lg:w-1/3 aspect-square lg:aspect-[3/4]"
             />
 
-            <div className="px-6 lg:px-8 py-6 sm:py-8 md:py-10 xl:py-12 sm:w-3/5 lg:w-4/6">
+            <div className="px-6 lg:px-8 py-6 sm:py-8 md:py-10 xl:py-12 sm:w-3/5 lg:w-2/3">
               <div className="flex flex-wrap justify-between text-sm lg:text-base text-neutral-500 font-light">
                 <p>
-                  {eventDate} ({eventDay})
+                  {eventDate} ({daysInWeek[eventDay]})
                 </p>
                 <p>
                   {eventStart} - {eventEnd}

@@ -29,7 +29,7 @@ export default function Page() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.2, delay: 0.8 }}
+          transition={{ duration: 0.2, delay: 1 }}
           className="flex flex-col justify-center items-center absolute bottom-20 z-10"
         >
           <motion.div
@@ -65,7 +65,7 @@ export default function Page() {
       <PageWrapper>
         <div className="bg-gradient-animate">
           <div id="section1" className="h-[60px]"></div>
-          <section className="px-[10vw] md:px-[15vw] py-[5vh]">
+          <section className="px-[10vw] md:px-[15vw] xl:px-[20vw] py-[5vh]">
             <p className="text-5xl text-neutral-8-- drop-shadow-lg font-black">
               大自然学习
             </p>
@@ -75,7 +75,7 @@ export default function Page() {
             <p className="text-neutral-800 py-4">开始你的自然之旅吧！</p>
           </section>
 
-          <section className="py-4 px-[10vw] md:px-[15vw]">
+          <section className="py-4 px-[10vw] md:px-[15vw] xl:px-[20vw]">
             <p className="text-lg font-bold text-neutral-800 py-4">
               我们的使命
             </p>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -16,6 +16,10 @@ const links = [
 export default function Navbar() {
   const path = usePathname();
   const [toggle, setToggle] = useState(false);
+  useEffect(() => {
+    if (toggle) openNav();
+    else closeNav();
+  }, [toggle]);
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", function (event) {
@@ -133,7 +137,8 @@ export default function Navbar() {
         </motion.div>
       </motion.nav>
 
-      <div id="sidenav" className={`${toggle ? openNav() : closeNav()} z-40 `}>
+      <div id="sidenav" className="z-40">
+        {/* ${toggle ? openNav() : closeNav()} */}
         <ul className="flex flex-col gap-12 px-8 py-4 ">
           {links.map((link) => (
             <li key={link.href} className="w-fit">
