@@ -336,8 +336,8 @@ export const events: Event[] = [
   {
     id: 2,
     title: "小小云朵收藏家 Little Cloud Experts",
-    start: new Date(2022, 8, 24, 14, 0),
-    end: new Date(2022, 8, 24, 18, 0),
+    start: new Date(2023, 8, 24, 14, 0),
+    end: new Date(2023, 8, 24, 18, 0),
     location: {
       name: "Anjung Floria, Putrajaya",
       lat: "2.913005533935713",
