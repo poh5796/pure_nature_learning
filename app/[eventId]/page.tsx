@@ -1,24 +1,25 @@
 "use client";
-
-import { events } from "@/app/_constants/constants";
-import FadeInWhenVisible from "@/app/fadein-wrapper";
-import { format, isBefore } from "date-fns";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { format, isBefore } from "date-fns";
+import { motion } from "framer-motion";
 import {
   AiOutlineEnvironment,
   AiOutlineCalendar,
   AiOutlineTeam,
   AiOutlineRight,
   AiOutlineStar,
+  AiOutlinePhone,
 } from "react-icons/ai";
 import * as ics from "ics";
-import { usePathname } from "next/navigation";
+import { events } from "@/app/_constants/constants";
+import { FadeInWrapper } from "../_utils/index";
 
 export default function Page({ params }: { params: { eventId: number } }) {
   const event = events.filter((event) => event.id == params.eventId)[0];
   const currentDate = new Date();
+  const eventDay = event.start.getDay();
   const eventDate = format(event.start, "d/M/Y");
   const eventStart = format(event.start, "h:mm aaa");
   const eventEnd = format(event.end, "h:mm aaa");
@@ -31,7 +32,6 @@ export default function Page({ params }: { params: { eventId: number } }) {
   const startMinute = event.start.getMinutes();
   const endHour = event.end.getHours();
   const endMinute = event.end.getMinutes();
-  const eventDay = event.start.getDay();
   const daysInWeek: string[] = [
     "Sunday",
     "Monday",
@@ -84,36 +84,36 @@ export default function Page({ params }: { params: { eventId: number } }) {
     }
   }
 
-  const googleMapsURL = "comgooglemaps://";
-  window.location.href = googleMapsURL;
+  // function redirectMaps() {
+  //   console.log("OS: " + os);
+  //   console.log("iOS: " + os == "iOS");
+  //   console.log("Android: " + os == "Android");
+  //   if (os == "iOS" || os == "Android") openWaze();
+  // }
 
-  function checkGoogleMaps() {
-    const googleMapsURL = "comgooglemaps://";
-    window.location.href = googleMapsURL;
+  // function checkWaze() {
+  //   const wazeURL = "waze://";
+  //   window.location.href = wazeURL;
 
-    setTimeout(() => {
-      // If the control reaches here, Google Maps is not installed
-      console.log("Google Maps not found.");
-    }, 1000);
-  }
-
-  function checkWaze() {
-    const wazeURL = "waze://";
-    window.location.href = wazeURL;
-
-    setTimeout(() => {
-      // If the control reaches here, Waze is not installed
-      console.log("Waze not found.");
-    }, 100);
-  }
+  //   setTimeout(() => {
+  //     // If the control reaches here, Waze is not installed
+  //     console.log("Waze not found.");
+  //   }, 100);
+  // }
 
   function openGoogleMaps() {
-    window.location.href = `http://www.google.com/maps/place/${event.location?.lat},${event.location?.long}`;
+    window.open(
+      `http://www.google.com/maps/search/?api=1&query=${event.location?.lat},${event.location?.long}&query_place_id=${event.location.placeId}`,
+      "_blank"
+    );
   }
 
-  function openWaze() {
-    window.location.href = `https://waze.com/ul/ll=${event.location?.lat},${event.location?.long}&navigate=yes`;
-  }
+  // function openWaze() {
+  //   window.open(
+  //     `https://waze.com/ul?ll=${event.location?.lat},${event.location?.long}&navigate=yes&zoom=16`,
+  //     "_blank"
+  //   );
+  // }
 
   return (
     <>
@@ -123,7 +123,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
           vh] lg:h-[50vh] rounded-xl flex justify-center items-center "
         >
           {/* Add/Remove "relative" for background effect */}
-          <FadeInWhenVisible>
+          <FadeInWrapper>
             <Image
               src={event.theme}
               width={0}
@@ -132,7 +132,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
               className="w-full h-full rounded-xl object-cover aspect-video"
               alt={"Event theme photo"}
             />
-          </FadeInWhenVisible>
+          </FadeInWrapper>
           <Image
             src={event.theme}
             width={0}
@@ -145,15 +145,13 @@ export default function Page({ params }: { params: { eventId: number } }) {
       </div>
 
       <div className="px-[10vw] md:px-[15vw] xl:px-[20vw] py-[5vh] flex flex-col">
-        <button onClick={() => checkGoogleMaps()}>Open Google Maps</button>
-        <button onClick={() => checkWaze()}>Open Waze</button>
         <p className="mt-8 mb-16 text-3xl md:text-4xl lg:text-5xl text-neutral-800 font-black text-shadow">
           {event.title}
         </p>
 
         <div className="flex flex-col gap-12">
           <div className="flex gap-8">
-            <div className="w-full lg:w-[60%]">
+            <div className="w-full lg:min-w-[35vw]">
               <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
                 When
               </p>
@@ -162,7 +160,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
               <motion.div
                 onClick={() => setReminder()}
                 whileHover={{ scale: 1.02 }}
-                className="w-full lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
+                className="w-full  bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
               >
                 <div className="flex justify-center items-center w-1/5 sm:w-1/6">
                   <AiOutlineCalendar className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
@@ -183,11 +181,11 @@ export default function Page({ params }: { params: { eventId: number } }) {
               </motion.div>
             </div>
 
-            <div className="hidden lg:block lg:w-[40%]">
+            <div className="hidden lg:block lg:w-full">
               <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
                 Fee
               </p>
-              <motion.div className="w-full lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow">
+              <motion.div className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex shadow">
                 <div className="flex justify-center items-center w-1/5">
                   <AiOutlineStar className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-yellow-500" />
                 </div>
@@ -197,7 +195,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
                 </p>
 
                 <motion.div className="flex justify-center items-center w-2/5">
-                  <Link
+                  {/* <Link
                     className={`${
                       isBefore(currentDate, event.start) ? "block" : "hidden"
                     } rounded-xl p-4 bg-sky-600`}
@@ -206,7 +204,16 @@ export default function Page({ params }: { params: { eventId: number } }) {
                     <span className="text-neutral-50 font-semibold">
                       Book now!
                     </span>
-                  </Link>
+                  </Link> */}
+                  <button
+                    className={`${
+                      isBefore(currentDate, event.start) ? "block" : "hidden"
+                    } rounded-xl p-4 bg-sky-600`}
+                  >
+                    <span className="text-neutral-50 font-semibold">
+                      Book now!
+                    </span>
+                  </button>
                 </motion.div>
               </motion.div>
             </div>
@@ -219,9 +226,9 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
             {/* Location, redirect to Google Map/Waze*/}
             <motion.div
-              onClick={() => checkGoogleMaps()}
+              onClick={() => openGoogleMaps()}
               whileHover={{ scale: 1.01 }}
-              className="w-full  lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
+              className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
             >
               <div className="flex justify-center items-center w-1/5 sm:w-1/6">
                 <AiOutlineEnvironment className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
@@ -241,7 +248,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
               Who
             </p>
-            <div className="w-full   lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow">
+            <div className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex shadow">
               <div className="flex justify-center items-center w-1/5 sm:w-1/6">
                 <AiOutlineTeam className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
               </div>
@@ -254,14 +261,50 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
           <div>
             <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
+              Question?
+            </p>
+
+            <motion.div
+              onClick={() => window.open("https://wa.me/60126553963", "_blank")}
+              whileHover={{ scale: 1.01 }}
+              className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
+            >
+              <div className="flex justify-center items-center w-1/5 sm:w-1/6">
+                <AiOutlinePhone className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
+              </div>
+
+              <p className="py-8 text-sm lg:text-base text-neutral-600  w-3/5 sm:w-4/6">
+                012-655 3963
+              </p>
+
+              <motion.div className="flex justify-center items-center w-1/5 sm:w-1/6">
+                <AiOutlineRight className="h-[15px] w-[15px] text-neutral-400" />
+              </motion.div>
+            </motion.div>
+          </div>
+
+          <div>
+            <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
               What it&apos;s about
             </p>
-            <div className="w-full   lg:max-w-[40vw] bg-neutral-50 rounded-xl flex shadow">
+            <div className="w-full   lg:max-w-[35vw] bg-neutral-50 rounded-xl flex shadow">
               <p className="px-6 py-8 text-sm lg:text-base text-neutral-600 text-justify">
                 {event.description}
               </p>
             </div>
           </div>
+
+          <form
+            action="/send-data-here"
+            method="post"
+            className="flex flex-col"
+          >
+            <label htmlFor="first">First name:</label>
+            <input type="text" id="first" name="first" />
+            <label htmlFor="last">Last name:</label>
+            <input type="text" id="last" name="last" />
+            <button type="submit">Submit</button>
+          </form>
 
           <div className={`${event.images.length > 0 ? "block" : "hidden"}`}>
             <p className="my-4 text-xl lg:text-2xl text-neutral-800 font-bold text-shadow">
@@ -271,7 +314,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <div className="columns-2 lg:columns-3 gap-8">
               {event.images.map((image, index) => {
                 return (
-                  <FadeInWhenVisible key={index}>
+                  <FadeInWrapper key={index}>
                     <Image
                       width={0}
                       height={0}
@@ -282,7 +325,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
                         index % 3 == 0 ? "aspect-square" : "aspect-video"
                       } w-full rounded-xl mb-6 object-cover`}
                     />
-                  </FadeInWhenVisible>
+                  </FadeInWrapper>
                 );
               })}
             </div>
@@ -300,7 +343,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
         </p>
 
         <motion.div className="flex justify-center items-center ">
-          <Link
+          {/* <Link
             className={`${
               isBefore(currentDate, event.start) ? "block" : "hidden"
             } rounded-xl px-6 py-4 bg-sky-600`}
@@ -309,7 +352,14 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <span className="text-xl text-neutral-50 font-semibold">
               Book now!
             </span>
-          </Link>
+          </Link> */}
+          <button
+            className={`${
+              isBefore(currentDate, event.start) ? "block" : "hidden"
+            } rounded-xl p-4 bg-sky-600`}
+          >
+            <span className="text-neutral-50 font-semibold">Book now!</span>
+          </button>
         </motion.div>
       </motion.div>
     </>

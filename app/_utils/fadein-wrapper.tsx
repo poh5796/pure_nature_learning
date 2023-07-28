@@ -1,6 +1,7 @@
+"use client";
 import { motion } from "framer-motion";
 
-export default function FadeInWhenVisible({ children }: { children: any }) {
+export default function FadeInWrapper({ children }: { children: any }) {
   return (
     <motion.div
       className="w-full h-full"

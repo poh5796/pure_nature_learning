@@ -218,7 +218,7 @@ import {
   eventImage2_77,
   eventImage2_78,
   eventImage2_79,
-} from "..";
+} from "../_utils";
 
 export const events: Event[] = [
   {
@@ -230,6 +230,7 @@ export const events: Event[] = [
       name: "Taman Metropolitan, Kepong",
       lat: "3.227339779268691",
       long: "101.64888942875902",
+      placeId: "ChIJ-_b6sbNHzDEREODfF0Yg2VQ",
     },
     description:
       "Join us for a thrilling nature learning adventure titled '纸飞机 Paper Plane' designed for curious minds aged 3 to 12 years old, along with their enthusiastic parents, in the scenic landscapes of Selangor, Malaysia. Embrace the wonders of the outdoors as we embark on an interactive journey, unfolding the mysteries of local flora and fauna. Engaging activities include guided nature walks, bird-watching, and crafting paper planes inspired by our feathered friends. Through games and storytelling, we'll discover the importance of conservation and appreciation for Mother Nature. This unforgettable weekend event promises laughter, discovery, and a stronger bond with our natural world.",
@@ -267,7 +268,6 @@ export const events: Event[] = [
       eventImage0_25,
       eventImage0_26,
     ],
-    booking: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   },
   {
     id: 1,
@@ -278,6 +278,7 @@ export const events: Event[] = [
       name: "Taman Metropolitan, Kepong",
       lat: "3.227339779268691",
       long: "101.64888942875902",
+      placeId: "ChIJ-_b6sbNHzDEREODfF0Yg2VQ",
     },
     description:
       "Join us for an enchanting nature learning experience titled '追风 Chasing Winds' specially crafted for children aged 3 to 12 years old, accompanied by their enthusiastic parents, in the breathtaking landscapes of Selangor, Malaysia. This weekend event invites young explorers to embrace the wonders of the great outdoors. Engage in guided nature walks to uncover the region's diverse flora and fauna, while indulging in interactive workshops on wind-powered crafts and kite-making. Through storytelling and eco-games, kids will learn about the importance of wind energy and its role in sustaining our environment. Prepare for an unforgettable adventure that ignites curiosity and fosters a love for nature.",
@@ -331,7 +332,6 @@ export const events: Event[] = [
       eventImage1_41,
       eventImage1_42,
     ],
-    booking: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   },
   {
     id: 2,
@@ -342,6 +342,7 @@ export const events: Event[] = [
       name: "Anjung Floria, Putrajaya",
       lat: "2.913005533935713",
       long: "101.67891240027235",
+      placeId: "ChIJ_UiE6zS2zTERsVUghGMD1KY",
     },
     description:
       "Join us for an exciting nature learning adventure 《小小云朵收藏家 Little Cloud Experts》! This event is specially designed for children aged 3-12 years old, along with their parents, to explore the wonders of nature. Held on weekends in the beautiful Selangor, Malaysia, our engaging activities will spark curiosity and foster a deeper appreciation for the environment. Embark on nature walks, where our expert guides will unveil the secrets of local flora and fauna. Enjoy hands-on activities like cloud-watching, plant identification, and creating nature crafts. Together, let's nurture a love for nature and create lasting memories with your little ones. Don't miss this educational and fun-filled experience!",
@@ -432,6 +433,5 @@ export const events: Event[] = [
       eventImage2_78,
       eventImage2_79,
     ],
-    booking: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   },
 ];

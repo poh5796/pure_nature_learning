@@ -156,6 +156,10 @@ import eventImage2_76 from "@/assets/albums/2022_09_29__13_05_00_76.jpg";
 import eventImage2_77 from "@/assets/albums/2022_09_29__13_05_00_77.jpg";
 import eventImage2_78 from "@/assets/albums/2022_09_29__13_05_00_78.jpg";
 import eventImage2_79 from "@/assets/albums/2022_09_29__13_05_00_79.jpg";
+import FadeInWrapper from "./fadein-wrapper";
+import PageWrapper from "./page-wrapper";
+
+export { FadeInWrapper, PageWrapper };
 
 export {
   eventPoster0,

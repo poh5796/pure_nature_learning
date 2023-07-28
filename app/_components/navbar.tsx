@@ -9,7 +9,7 @@ import logoBird from "../../assets/logos/logo-bird.png";
 
 const links = [
   { href: "/about", name: "关于" },
-  { href: "/event", name: "活动" },
+  // { href: "/event", name: "活动" },
   { href: "#contact", name: "联络我们" },
 ];
 
@@ -144,6 +144,7 @@ export default function Navbar() {
             <li key={link.href} className="w-fit">
               <motion.div whileHover={{ scale: 1.04 }}>
                 <Link
+                  tabIndex={-1} //Disable focus on hidden side nav
                   className={`${
                     link.href == path ? "font-black" : "font-semibold"
                   } text-xl text-neutral-900`}

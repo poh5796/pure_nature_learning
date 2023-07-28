@@ -13,18 +13,21 @@ export interface Event {
   poster: StaticImageData;
   agenda: string;
   images: StaticImageData[];
-  booking: string;
 }
+
 interface Location {
   name: string;
   lat: string;
   long: string;
+  placeId: string;
 }
+
 export interface Benefit {
   title: string;
   description: string;
   icon: JSX.Element;
 }
+
 export interface Contact {
   title: string;
   link: string;
