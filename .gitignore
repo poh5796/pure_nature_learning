@@ -38,3 +38,5 @@ next-env.d.ts
 dev.db*
 # Local Netlify folder
 .netlify
+# Google Service Account
+pure-nature-learning-3008c1f8697f.json

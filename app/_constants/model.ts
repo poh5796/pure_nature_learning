@@ -8,11 +8,17 @@ export interface Event {
   location: Location;
   description: string;
   age: string;
-  fee: number;
+  fee: Fee;
   theme: string;
   poster: StaticImageData;
+  sheetId: string;
   agenda: string;
   images: StaticImageData[];
+}
+
+interface Fee {
+  adult: number;
+  children: number;
 }
 
 interface Location {
@@ -28,8 +34,23 @@ export interface Benefit {
   icon: JSX.Element;
 }
 
-export interface Contact {
+export interface Social {
   title: string;
   link: string;
   image: JSX.Element;
+}
+
+export interface Form {
+  name: string;
+  dob: Date;
+  idNumber: string;
+  age: string;
+  gender: string;
+  guardianName: string;
+  guardianIdNumber: string;
+  guardianEmail: string;
+  guardianContact: string;
+  relationship: string;
+  emergencyContact: string;
+  paymentReceipt: string;
 }

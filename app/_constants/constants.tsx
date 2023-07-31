@@ -1,4 +1,4 @@
-import { Benefit, Contact, Event } from "./model";
+import { Benefit, Event, Social } from "./model";
 import {
   AiFillFacebook,
   AiOutlineInstagram,
@@ -8,7 +8,41 @@ import {
   AiOutlineFire,
 } from "react-icons/ai";
 
-export const contacts: Contact[] = [
+const payment = {
+  payment: `Payment Methods & Account Numbers
+  Bank Transfer
+  Bank : MAYBANK
+  Account Number : 0102 9106 9692
+  Name : Teh Ee Fang 
+  References: Kid's Name(s) Pure NL
+  
+  E-Wallet
+  Platform : Touch 'N Go eWallet 
+  Account Number : 0126553963
+  Name : Teh Ee Fang 
+  References: Kid's Name(s) Pure NL`,
+};
+
+export const contact = {
+  eefang: "012 - 655 3963",
+};
+
+export const daysInWeek: string[] = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+export const operatingSystems = {
+  IOS: "iOS",
+  ANDROID: "Android",
+};
+
+export const socials: Social[] = [
   {
     title: "Facebook",
     link: "https://www.facebook.com/purenaturelearning",
@@ -235,9 +269,13 @@ export const events: Event[] = [
     description:
       "Join us for a thrilling nature learning adventure titled '纸飞机 Paper Plane' designed for curious minds aged 3 to 12 years old, along with their enthusiastic parents, in the scenic landscapes of Selangor, Malaysia. Embrace the wonders of the outdoors as we embark on an interactive journey, unfolding the mysteries of local flora and fauna. Engaging activities include guided nature walks, bird-watching, and crafting paper planes inspired by our feathered friends. Through games and storytelling, we'll discover the importance of conservation and appreciation for Mother Nature. This unforgettable weekend event promises laughter, discovery, and a stronger bond with our natural world.",
     age: "3 - 12 years old",
-    fee: 0,
+    fee: {
+      adult: 0,
+      children: 0,
+    },
     theme: "https://source.unsplash.com/2c9ffiPlD9Q",
     poster: eventPoster0,
+    sheetId: "",
     agenda: "",
     images: [
       eventImage0_0,
@@ -283,9 +321,13 @@ export const events: Event[] = [
     description:
       "Join us for an enchanting nature learning experience titled '追风 Chasing Winds' specially crafted for children aged 3 to 12 years old, accompanied by their enthusiastic parents, in the breathtaking landscapes of Selangor, Malaysia. This weekend event invites young explorers to embrace the wonders of the great outdoors. Engage in guided nature walks to uncover the region's diverse flora and fauna, while indulging in interactive workshops on wind-powered crafts and kite-making. Through storytelling and eco-games, kids will learn about the importance of wind energy and its role in sustaining our environment. Prepare for an unforgettable adventure that ignites curiosity and fosters a love for nature.",
     age: "4 - 12 years old",
-    fee: 298,
+    fee: {
+      adult: 48,
+      children: 120,
+    },
     theme: "https://source.unsplash.com/D0tD6n3Ao8E",
     poster: eventPoster1,
+    sheetId: "",
     agenda: "",
     images: [
       eventImage1_0,
@@ -347,9 +389,13 @@ export const events: Event[] = [
     description:
       "Join us for an exciting nature learning adventure 《小小云朵收藏家 Little Cloud Experts》! This event is specially designed for children aged 3-12 years old, along with their parents, to explore the wonders of nature. Held on weekends in the beautiful Selangor, Malaysia, our engaging activities will spark curiosity and foster a deeper appreciation for the environment. Embark on nature walks, where our expert guides will unveil the secrets of local flora and fauna. Enjoy hands-on activities like cloud-watching, plant identification, and creating nature crafts. Together, let's nurture a love for nature and create lasting memories with your little ones. Don't miss this educational and fun-filled experience!",
     age: "3 - 12 years old",
-    fee: 298,
+    fee: {
+      adult: 48,
+      children: 160,
+    },
     theme: "https://source.unsplash.com/PEm_sLmJT-w",
     poster: eventPoster2,
+    sheetId: "",
     agenda: "",
     images: [
       eventImage2_0,

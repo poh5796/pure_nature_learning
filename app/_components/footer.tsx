@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { contacts } from "../_constants/constants";
+import { socials } from "../_constants/constants";
 import Image from "next/image";
 
 export default function Footer() {
@@ -12,16 +12,16 @@ export default function Footer() {
         <div>
           <p className="mb-4 text-neutral-600 text-xl font-bold">Contacts</p>
           <div className="flex flex-col gap-2">
-            {contacts.map((contact) => {
+            {socials.map((social) => {
               return (
                 <Link
-                  href={contact.link}
-                  key={contact.title}
+                  href={social.link}
+                  key={social.title}
                   className="flex items-center"
                 >
-                  {contact.image}&nbsp;
+                  {social.image}&nbsp;
                   <span className="text-neutral-500 font-medium">
-                    {contact.title}
+                    {social.title}
                   </span>
                 </Link>
               );
