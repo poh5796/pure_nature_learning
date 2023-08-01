@@ -26,8 +26,9 @@ import { Form } from "../_constants/model";
 
 export default function Page({ params }: { params: { eventId: number } }) {
   const [toggleModal, setToggleModal] = useState(false);
-  const modal: HTMLDialogElement = document.querySelector("#modal")!;
+
   useEffect(() => {
+    const modal: HTMLDialogElement = document.querySelector("#modal")!;
     if (toggleModal) modal?.showModal();
     else modal?.close();
   }, [toggleModal]);
@@ -339,7 +340,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
         <form action={updateSheet} method="post" className="flex flex-col px-6">
           <div className="flex flex-col gap-2 my-4">
-            <p className="font-medium">Children's Information</p>
+            <p className="font-medium">Children&apos;s Information</p>
             <input
               placeholder="Name"
               className={`${styles.formInput}`}
@@ -382,7 +383,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
           </div>
 
           <div className="flex flex-col gap-2 my-4">
-            <p className="font-medium">Guardian's Information</p>
+            <p className="font-medium">Guardian&apos;s Information</p>
             <select
               id="pet-select"
               className={`${styles.formInput} appearance-none`}
