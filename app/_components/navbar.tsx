@@ -86,8 +86,8 @@ export default function Navbar() {
               <motion.div whileHover={{ scale: 1.1 }}>
                 <Link
                   className={`${
-                    path == link.href ? "font-black" : "font-bold"
-                  } text-sm text-neutral-900 text-shadow`}
+                    path === link.href ? "font-black" : "font-bold"
+                  } text-sm text-neutral-800 text-shadow`}
                   href={link.href}
                   scroll={false}
                 >
@@ -146,7 +146,7 @@ export default function Navbar() {
                 <Link
                   tabIndex={-1} //Disable focus on hidden side nav
                   className={`${
-                    link.href == path ? "font-black" : "font-semibold"
+                    link.href === path ? "font-black" : "font-semibold"
                   } text-xl text-neutral-900`}
                   href={link.href}
                   onClick={() => setToggle(!toggle)}

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
-const plugin = require("tailwindcss/plugin");
+// const defaultTheme = require("tailwindcss/defaultTheme");
+// const plugin = require("tailwindcss/plugin");
+const pluginForms = require("@tailwindcss/forms");
 
 module.exports = {
   content: [
@@ -18,5 +19,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [pluginForms],
 };

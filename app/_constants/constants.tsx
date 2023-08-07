@@ -24,7 +24,7 @@ const payment = {
 };
 
 export const contact = {
-  eefang: "012 - 655 3963",
+  eefang: "+6012 - 655 3963",
 };
 
 export const daysInWeek: string[] = [

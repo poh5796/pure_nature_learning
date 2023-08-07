@@ -23,10 +23,10 @@ import { FadeInWrapper } from "../_utils/index";
 import { useEffect, useState } from "react";
 import { styles } from "../styles";
 import { Form } from "../_constants/model";
+import Link from "next/link";
 
 export default function Page({ params }: { params: { eventId: number } }) {
   const [toggleModal, setToggleModal] = useState(false);
-
   useEffect(() => {
     const modal: HTMLDialogElement = document.querySelector("#modal")!;
     if (toggleModal) modal?.showModal();
@@ -42,12 +42,15 @@ export default function Page({ params }: { params: { eventId: number } }) {
   const eventEnd = format(event.end, "h:mm aaa");
   const eventFullStart = format(event.start, "yyyyMMdd'T'HHmmss");
   const eventFullEnd = format(event.end, "yyyyMMdd'T'HHmmss");
-  const year = event.start.getFullYear();
-  const month = event.start.getMonth() + 1;
-  const day = event.start.getDate();
+  const startYear = event.start.getFullYear();
+  const startMonth = event.start.getMonth() + 1;
+  const startDay = event.start.getDate();
   const startHour = event.start.getHours();
   const startMinute = event.start.getMinutes();
   //Event End
+  const endYear = event.end.getFullYear();
+  const endMonth = event.end.getMonth() + 1;
+  const endDay = event.end.getDate();
   const endHour = event.end.getHours();
   const endMinute = event.end.getMinutes();
 
@@ -59,10 +62,10 @@ export default function Page({ params }: { params: { eventId: number } }) {
   ics.createEvent(
     {
       title: `${event.title}`,
-      start: [year, month, day, startHour, startMinute],
+      start: [startYear, startMonth, startDay, startHour, startMinute],
       startInputType: "local",
       startOutputType: "local",
-      end: [year, month, day, endHour, endMinute],
+      end: [endYear, endMonth, endDay, endHour, endMinute],
       endInputType: "local",
       endOutputType: "local",
       location: `${event.location.name}`,
@@ -97,6 +100,13 @@ export default function Page({ params }: { params: { eventId: number } }) {
       `http://www.google.com/maps/search/?api=1&query=${event.location?.lat},${event.location?.long}&query_place_id=${event.location.placeId}`,
       "_blank"
     );
+  }
+
+  function parsePhoneNumber(input: string): string {
+    // Use a regular expression to remove all non-numeric characters
+    const numericOnly = input.replace(/\D/g, "");
+
+    return numericOnly;
   }
 
   async function updateSheet() {}
@@ -138,7 +148,6 @@ export default function Page({ params }: { params: { eventId: number } }) {
           <div className="flex gap-4">
             <div className="w-full lg:min-w-[35vw]">
               <p className={`${styles.eventPageTitle}`}>When</p>
-
               {/* Calendar, setReminder*/}
               <motion.div
                 onClick={() => setReminder()}
@@ -191,14 +200,24 @@ export default function Page({ params }: { params: { eventId: number } }) {
                       isBefore(currentDate, event.start) ? "block" : "hidden"
                     } flex justify-center items-center`}
                   >
-                    <button
+                    {/* <button
                       onClick={() => setToggleModal(true)}
                       className="rounded-xl p-4 bg-sky-600"
                     >
                       <span className=" text-neutral-100 font-semibold">
                         Book now!
                       </span>
-                    </button>
+                    </button> */}
+                    <Link
+                      href={`/booking/${event.id}`}
+                      className={`${
+                        isBefore(currentDate, event.start) ? "block" : "hidden"
+                      } rounded-xl p-4 bg-sky-600`}
+                    >
+                      <span className="text-neutral-100 font-semibold">
+                        Book now!
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -245,7 +264,12 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <p className={`${styles.eventPageTitle}`}>Question?</p>
 
             <motion.div
-              onClick={() => window.open("https://wa.me/60126553963", "_blank")}
+              onClick={() =>
+                window.open(
+                  `https://wa.me/${parsePhoneNumber(contact.eefang)}`,
+                  "_blank"
+                )
+              }
               whileHover={{ scale: 1.01 }}
               className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
             >
@@ -307,7 +331,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <p className="font-semibold">Free admission</p>
           ) : (
             <p>
-              <span className="text-xs sm:text-sm">RM </span>
+              <span className="text-xs sm:text-sm">Starting from RM </span>
               <span className="text-sm sm:text-base font-semibold text-neutral-700">
                 {event.fee.children.toFixed(2)}
               </span>
@@ -316,14 +340,22 @@ export default function Page({ params }: { params: { eventId: number } }) {
         </div>
 
         <div className="flex justify-center items-center">
-          <button
+          {/* <button
             onClick={() => setToggleModal(true)}
             className={`${
               isBefore(currentDate, event.start) ? "block" : "hidden"
             } rounded-xl p-4 bg-sky-600`}
           >
             <span className="text-neutral-100 font-semibold">Book now!</span>
-          </button>
+          </button> */}
+          <Link
+            href={`/booking/${event.id}`}
+            className={`${
+              isBefore(currentDate, event.start) ? "block" : "hidden"
+            } rounded-xl p-4 bg-sky-600`}
+          >
+            <span className="text-neutral-100 font-semibold">Book now!</span>
+          </Link>
         </div>
       </div>
 
@@ -338,7 +370,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
           </button>
         </div>
 
-        <form action={updateSheet} method="post" className="flex flex-col px-6">
+        <form method="post" className="flex flex-col px-6">
           <div className="flex flex-col gap-2 my-4">
             <p className="font-medium">Children&apos;s Information</p>
             <input
@@ -365,16 +397,12 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
             <div className="flex gap-2">
               <input
-                placeholder="Date of birth"
-                className={`${styles.formInput} w-1/2`}
-                type="text"
+                type="date"
                 name="dob"
+                className={`${styles.formInput} w-1/2`}
               />
 
-              <select
-                id="gender"
-                className={`${styles.formInput} w-1/2 appearance-none`}
-              >
+              <select id="gender" className={`${styles.formInput} w-1/2`}>
                 <option selected>Gender</option>
                 <option value="dog">Dog</option>
                 <option value="cat">Cat</option>
@@ -384,18 +412,22 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
           <div className="flex flex-col gap-2 my-4">
             <p className="font-medium">Guardian&apos;s Information</p>
-            <select
+            {/* <select
               id="pet-select"
               className={`${styles.formInput} appearance-none`}
             >
               <option selected>Relationship</option>
               <option value="dog">Dog</option>
               <option value="cat">Cat</option>
-            </select>
+            </select> */}
             <input
               type="file"
               name="receipt"
-              className={`${styles.formInput}`}
+              className={`${styles.formInput} file:mr-4
+              file:rounded-full file:border-0
+              file:text-sm file:font-semibold
+              file:bg-violet-50 file:text-violet-700
+              hover:file:bg-violet-100`}
             />
           </div>
 
