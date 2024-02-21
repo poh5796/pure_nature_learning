@@ -504,3 +504,4 @@ export const events: Event[] = [
     agenda: "",
     images: []
   }
+]
