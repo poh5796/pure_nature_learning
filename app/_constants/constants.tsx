@@ -483,7 +483,7 @@ export const events: Event[] = [
   {
     id: 3,
     title: "小小探险家指南",
-    start: new Date(2024, 2, 16, 09, 0),
+    start: new Date(2024, 2, 16, 9, 0),
     end: new Date(2024, 2, 16, 12, 0),
     location: {
       name: "Taman Eko Rimba Komanwel, Rawang",
@@ -502,4 +502,5 @@ export const events: Event[] = [
     poster: eventPoster2,
     sheetId: "",
     agenda: "",
-    images: [
+    images: []
+  }
