@@ -244,8 +244,9 @@ export const events: Event[] = [
     url: "https://www.google.com",
   },
   {
-    id: 3,
-    title: "小小探险家指南",
+    id: 4,
+    enTitle: "haha",
+    chsTitle: "小小探险家指南",
     start: new Date(2024, 2, 16, 9, 0),
     end: new Date(2024, 2, 16, 12, 0),
     location: {
@@ -257,14 +258,11 @@ export const events: Event[] = [
     description:
       "Join us for an exciting nature learning adventure 《小小云朵收藏家 Little Cloud Experts》! This event is specially designed for children aged 3-12 years old, along with their parents, to explore the wonders of nature. Held on weekends in the beautiful Selangor, Malaysia, our engaging activities will spark curiosity and foster a deeper appreciation for the environment. Embark on nature walks, where our expert guides will unveil the secrets of local flora and fauna. Enjoy hands-on activities like cloud-watching, plant identification, and creating nature crafts. Together, let's nurture a love for nature and create lasting memories with your little ones. Don't miss this educational and fun-filled experience!",
     age: "3 - 12 years old",
-    fee: {
-      adult: 48,
-      children: 160,
-    },
+    fee: 198,
     theme: "https://source.unsplash.com/PEm_sLmJT-w",
-    poster: eventPoster2,
-    sheetId: "",
-    agenda: "",
-    images: []
+    poster: "",
+    agendas: [],
+    images: [],
+    url: ""
   }
 ]
