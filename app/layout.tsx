@@ -1,10 +1,10 @@
-import { Inter } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 
 import Footer from "./_components/footer";
 import Navbar from "./_components/navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const quicksand = Quicksand({ subsets: ["latin"] });
 
 export const metadata = {
   title: "朴乐自然学习 | Pure Nature Learning",
@@ -25,14 +25,10 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin=""
         />
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap"
-          rel="stylesheet"
-        /> */}
       </head>
-      <body className="bg-neutral-100 antialiased">
+      <body className={`${quicksand.className} bg-neutral-100 antialiased`}>
         <Navbar></Navbar>
-        <div className={`${inter.className}`}>{children}</div>
+        {children}
         <Footer></Footer>
       </body>
     </html>

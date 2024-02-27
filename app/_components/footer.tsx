@@ -10,13 +10,13 @@ export default function Footer() {
     >
       <div className="py-8 flex justify-center">
         <div>
-          <p className="mb-4 text-neutral-600 text-xl font-bold">Contacts</p>
-          <div className="flex flex-col gap-2">
-            {socials.map((social) => {
+          <p className="mb-4 text-neutral-600 text-xl font-bold text-center">Contacts</p>
+          <div className="flex gap-8 flex-wrap justify-between">
+            {socials.map((social, index) => {
               return (
                 <Link
+                  key={index}
                   href={social.link}
-                  key={social.title}
                   className="flex items-center"
                 >
                   {social.image}&nbsp;

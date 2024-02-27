@@ -121,7 +121,7 @@ body {
   }
 }
 
-.bg-gradient-animate {
+/* .bg-gradient-animate {
   background: linear-gradient(270deg, #679fb1, #fff);
   background-size: 300% 300%;
   -webkit-animation: bgGradientAnimate 5s ease infinite;
@@ -160,7 +160,7 @@ body {
   100% {
     background-position: 0% 50%;
   }
-}
+} */
 .text-shadow {
   text-shadow: rgba(255, 255, 255, 1) 0px 0px 3px;
 }

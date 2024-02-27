@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import logoBird from "../../assets/logos/logo-bird.png";
 
 const links = [
-  { href: "/about", name: "关于" },
+  // { href: "/about", name: "关于" },
   // { href: "/event", name: "活动" },
   { href: "#contact", name: "联络我们" },
 ];
