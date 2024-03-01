@@ -35,17 +35,33 @@ export default function EventCard({ event }: { event: Event }) {
             />
 
             <div className="px-6 lg:px-8 py-6 sm:py-8 md:py-10 xl:py-12 sm:w-3/5 lg:w-[2.5/4]">
-              <div className="flex flex-wrap justify-between text-sm lg:text-base text-neutral-700 font-medium">
+              <div className="flex justify-between text-sm items-center lg:text-base text-neutral-700 font-medium">
                 <p>
-                  {eventDate} ({daysInWeek[eventDay]})
+                  {eventDate} ({daysInWeek[eventDay]}), {eventStart} -{" "}
+                  {eventEnd}
                 </p>
                 &nbsp;
-                <p>
+                <div
+                  className={`${
+                    isBefore(currentDate, event.start) ? "h-[24px]" : "h-[16px]"
+                  } flex my-2 sm:my-3`}
+                >
+                  <p
+                    className={`${
+                      isBefore(currentDate, event.start)
+                        ? "inline-block"
+                        : "hidden"
+                    } border border-emerald-600 text-emerald-600 bg-green-100 text-xs lg:text-sm rounded-md px-2 py-1 flex justify-center items-center`}
+                  >
+                    Upcoming
+                  </p>
+                </div>
+                {/*flex-wrap  <p>
                   {eventStart} - {eventEnd}
-                </p>
+                </p> */}
               </div>
 
-              <div
+              {/* <div
                 className={`${
                   isBefore(currentDate, event.start) ? "h-[24px]" : "h-[16px]"
                 } flex my-2 sm:my-3`}
@@ -55,17 +71,17 @@ export default function EventCard({ event }: { event: Event }) {
                     isBefore(currentDate, event.start)
                       ? "inline-block"
                       : "hidden"
-                  } border border-green-300 text-emerald-700 bg-emerald-100  text-xs lg:text-sm rounded-md px-2 py-1 flex justify-center items-center`}
+                  } border border-emerald-600 text-emerald-600 bg-white text-xs lg:text-sm rounded-md px-2 py-1 flex justify-center items-center`}
                 >
                   Upcoming
                 </p>
-              </div>
+              </div> */}
 
-              <div>
-                <p className="mb-2 lg:mb-4 text-2xl lg:text-4xl text-neutral-800 font-bold">
+              <div className="my-6">
+                <p className="mb-2 text-2xl lg:text-4xl text-neutral-800 font-bold">
                   {event.enTitle}
                 </p>
-                <p className="mb-2 lg:mb-4 text-2xl lg:text-4xl text-neutral-800 font-bold">
+                <p className="mb-2 text-2xl lg:text-4xl text-neutral-800 font-bold">
                   {event.chsTitle}
                 </p>
                 <p className="lg:text-lg text-neutral-600 font-semibold">
@@ -73,11 +89,11 @@ export default function EventCard({ event }: { event: Event }) {
                 </p>
               </div>
 
-              <div
+              {/* <div
                 className={`${
                   isBefore(currentDate, event.start) ? "h-[16px]" : "h-[24px]"
                 } flex my-2 sm:my-3`}
-              ></div>
+              ></div> */}
 
               <p className="line-clamp-3 sm:line-clamp-4 xl:line-clamp-5  text-sm lg:text-base text-neutral-600 text-justify">
                 {event.description}

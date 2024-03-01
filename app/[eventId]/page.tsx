@@ -148,7 +148,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
               <motion.div
                 onClick={() => setReminder()}
                 whileHover={{ scale: 1.02 }}
-                className="w-full bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
+                className="w-full bg-neutral-50 rounded-xl flex shadow hover:shadow-lg hover:cursor-pointer"
               >
                 <div className="flex justify-center items-center w-1/5 sm:w-1/6">
                   <AiOutlineCalendar className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
