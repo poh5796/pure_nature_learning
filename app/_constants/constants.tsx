@@ -202,8 +202,8 @@ export const events: Event[] = [
     id: 2,
     enTitle: "Little Cloud Experts",
     chsTitle: "小小云朵收藏家",
-    start: new Date(2023, 9, 24, 14, 0),
-    end: new Date(2023, 9, 24, 18, 0),
+    start: new Date(2023, 2, 24, 14, 0),
+    end: new Date(2023, 2, 24, 18, 0),
     location: {
       name: "Anjung Floria, Putrajaya",
       lat: "2.913005533935713",
@@ -225,8 +225,8 @@ export const events: Event[] = [
     id: 3,
     enTitle: "The Moody Dinosaur",
     chsTitle: "爱发脾气的小恐龙",
-    start: new Date(2024, 10, 23, 9, 0),
-    end: new Date(2024, 10, 23, 18, 0),
+    start: new Date(2023, 8, 23, 9, 0),
+    end: new Date(2023, 8, 23, 18, 0),
     location: {
       name: "Taman Eko Rimba Komanwel, Rawang",
       lat: "3.289296102643686",
@@ -239,13 +239,16 @@ export const events: Event[] = [
     theme: "https://source.unsplash.com/hYKG311mff8",
     poster:
       "https://drive.google.com/file/d/1UrPCyOczKL7kVaA2_2xk4OH4C1gCbiRi/view",
-    agendas: [],
+    agendas: [
+      "https://drive.google.com/uc?id=1AP00rXl7Xk24H5Zz2sYd1qkz2y9idrES&export=view",
+      "https://drive.google.com/uc?id=1esHME996antD0T0HqYBwEROengU8Urbr&export=view",
+    ],
     images: [],
     url: "https://www.google.com",
   },
   {
     id: 4,
-    enTitle: "haha",
+    enTitle: "Tiny Explorer's Guide",
     chsTitle: "小小探险家指南",
     start: new Date(2024, 2, 16, 9, 0),
     end: new Date(2024, 2, 16, 12, 0),
@@ -263,6 +266,6 @@ export const events: Event[] = [
     poster: "",
     agendas: [],
     images: [],
-    url: ""
-  }
-]
+    url: "",
+  },
+];

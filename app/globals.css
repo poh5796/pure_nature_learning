@@ -164,3 +164,7 @@ body {
 .text-shadow {
   text-shadow: rgba(255, 255, 255, 1) 0px 0px 3px;
 }
+
+.swiper-pagination-bullet-active{
+    background: rgb(4 120 87) !important;
+}

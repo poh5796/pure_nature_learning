@@ -148,7 +148,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
               <motion.div
                 onClick={() => setReminder()}
                 whileHover={{ scale: 1.02 }}
-                className="w-full bg-neutral-50 rounded-xl flex shadow hover:shadow-lg hover:cursor-pointer"
+                className="w-full bg-white rounded-xl flex shadow hover:shadow-lg hover:cursor-pointer"
               >
                 <div className="flex justify-center items-center w-1/5 sm:w-1/6">
                   <AiOutlineCalendar className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
@@ -172,7 +172,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <div className="hidden lg:block lg:w-full">
               <p className={`${styles.eventPageTitle}`}>Fee</p>
 
-              <div className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex shadow">
+              <div className="w-full lg:max-w-[35vw] bg-white rounded-xl flex shadow">
                 {/* <div className="flex justify-center items-center w-1/5">
                   <AiOutlineStar className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-yellow-500" />
                 </div> */}
@@ -220,7 +220,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <motion.div
               onClick={() => openGoogleMaps()}
               whileHover={{ scale: 1.01 }}
-              className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
+              className="w-full lg:max-w-[35vw] bg-white rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
             >
               <div className="flex justify-center items-center w-1/5 sm:w-1/6">
                 <AiOutlineEnvironment className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
@@ -246,8 +246,8 @@ export default function Page({ params }: { params: { eventId: number } }) {
             <Swiper
               spaceBetween={50}
               slidesPerView={1}
-              onSlideChange={() => console.log("slide change")}
-              onSwiper={(swiper) => console.log(swiper)}
+              onSlideChange={() => {}}
+              onSwiper={() => {}}
               pagination={{
                 dynamicBullets: true,
               }}
@@ -256,7 +256,14 @@ export default function Page({ params }: { params: { eventId: number } }) {
               {event.agendas.map((agenda, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <Image src={agenda} alt={""} width={300} height={500} />{" "}
+                    <div className="bg-white rounded-xl flex justify-center items-center -z-50">
+                      <Image
+                        src={agenda}
+                        alt={"Agenda's photo"}
+                        width={500}
+                        height={300}
+                      />
+                    </div>
                   </SwiperSlide>
                 );
               })}
@@ -264,7 +271,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
           </div>
           <div>
             <p className={`${styles.eventPageTitle}`}>Who</p>
-            <div className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex">
+            <div className="w-full lg:max-w-[35vw] bg-white rounded-xl flex">
               <div className="flex justify-center items-center w-1/5 sm:w-1/6">
                 <AiOutlineTeam className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
               </div>
@@ -286,7 +293,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
                 )
               }
               whileHover={{ scale: 1.01 }}
-              className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
+              className="w-full lg:max-w-[35vw] bg-white rounded-xl flex shadow hover:shadow-md hover:cursor-pointer"
             >
               <div className="flex justify-center items-center w-1/5 sm:w-1/6">
                 <AiOutlinePhone className="h-[20px] w-[20px] md:h-[25px] md:w-[25px] text-neutral-400" />
@@ -304,7 +311,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
 
           <div>
             <p className={`${styles.eventPageTitle}`}>What it&apos;s about</p>
-            <div className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex">
+            <div className="w-full lg:max-w-[35vw] bg-white rounded-xl flex">
               <p className="px-6 py-8 text-sm lg:text-base text-neutral-600 text-justify leading-relaxed">
                 {event.description}
               </p>
@@ -335,12 +342,12 @@ export default function Page({ params }: { params: { eventId: number } }) {
         </div>
       </div>
 
-      <div className="px-[10vw] fixed bottom-0 w-full flex justify-between items-center drop-shadow-2xl lg:hidden bg-neutral-50">
+      <div className="px-[10vw] fixed bottom-0 w-full flex justify-between items-center drop-shadow-2xl lg:hidden bg-white z-50">
         <div className="flex justify-center items-center">
           {/* <AiOutlineStar className="h-[25px] w-[25px] text-yellow-500" /> */}
         </div>
 
-        <div className="py-10 text-neutral-600">
+        <div className="py-8 text-neutral-600">
           {event.fee == 0 ? (
             <p className="font-semibold">Free admission</p>
           ) : (
