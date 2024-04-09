@@ -236,7 +236,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
             </motion.div>
           </div>
 
-          <div>
+          <div className={`${event.agendas.length > 0 ? "block" : "hidden"}`}>
             <p className={`${styles.eventPageTitle}`}>Agenda</p>
             {/* <div className="w-full lg:max-w-[35vw] bg-neutral-50 rounded-xl flex"> */}
             {/* <div className="flex justify-center items-center w-1/5 sm:w-1/6">
@@ -309,7 +309,7 @@ export default function Page({ params }: { params: { eventId: number } }) {
             </motion.div>
           </div>
 
-          <div>
+          <div className={`${event.description ? "block" : "hidden"}`}>
             <p className={`${styles.eventPageTitle}`}>What it&apos;s about</p>
             <div className="w-full lg:max-w-[35vw] bg-white rounded-xl flex">
               <p className="px-6 py-8 text-sm lg:text-base text-neutral-600 text-justify leading-relaxed">

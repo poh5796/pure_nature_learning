@@ -69,7 +69,7 @@ body {
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  border: clamp(8px, 1vw, 16px) solid #44453d;
+  border: clamp(8px, 1vw, 16px) solid rgb(6 78 59);
   border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
   position: relative;
   transition: all 1s ease-in-out;

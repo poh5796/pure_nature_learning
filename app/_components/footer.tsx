@@ -10,7 +10,7 @@ export default function Footer() {
       id="contact"
       className="px-8 flex flex-col justify-around border text-sm text-neutral-600 bg-neutral-50"
     >
-      <div className="my-12">
+      <div className="my-8">
         <p className="mb-8 text-neutral-600 text-xl font-bold text-center">
           Contacts
         </p>

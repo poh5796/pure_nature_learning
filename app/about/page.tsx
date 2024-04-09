@@ -7,16 +7,12 @@ import Image from "next/image";
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 import React from 'react';
-// import Swiper and modules styles
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export default function Page() {
-  // const swiper = new Swiper(".swiper", {
-  //   // configure Swiper to use modules
-  //   modules: [Navigation, Pagination],
-  // });
   return (
     <>
       <div className="fadeout bg-neutral-50 absolute top-0 left-0 h-[95vh] w-full z-10"></div>
